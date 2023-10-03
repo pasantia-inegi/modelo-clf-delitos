@@ -44,9 +44,18 @@ engine: knitr
 
 [**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 
-[**Mentoría a Censo: API Data INE y paquetes asociados**]{.big-par .center-justified}
+[**Proyecto: API Data INE y paquetes asociados**]{.big-par .center-justified}
 
 [**octubre 2023**]{.big-par .center-justified}
+
+
+## Componentes del proyecto
+
+- API (80% ok)
+
+- Paquete en R (95% ok)
+
+- Paquete en Python (0% )
 
 
 
@@ -71,6 +80,7 @@ de conocer en detalle cómo funciona este otro.
 ## ¿Qué es una API?
 
 
+<img src="imagenes/rest-api.jpg" width="100%" style="float: right;" />
 
 
 
@@ -78,149 +88,123 @@ de conocer en detalle cómo funciona este otro.
 
 ## Uso y motivación
 
-:::{.incremental .medium-par}
-- La API del INE da acceso directo a las tablas publicadas por el INE, evitándole a sus usuarios pasar
-por la página web, además de entregar información como nombres de las columnas,
+- La API del INE da acceso directo a las tablas publicadas por el INE, además de entregar información como nombres de las columnas,
 metadatos varios y nombres de las posibles tablas a consultar.
   - Actualmente se encuentran disponibles EPF, ENUSC, ESI y ENE
   
 - La idea de su creación es facilitar el acceso a datos a usuarios más avanzados, que conocen este tipo de herramientas.
 
-- El paquete, además, permite acceder a la API en un formato más familiar, que sea cómodo para usuarios y usuarias de nivel intermedio
-:::
+- El paquete, además, permite acceder a la API en un formato más familiar
 
-## La API data INE
+
+## Paquete INE-data
+
+El paquete INE-data se conecta a la API y facilita la descarga de datos desde el código de R
+
+
+Las encuestas disponibles son: **ene epf_personas epf_gastos enusc esi**
+
+**posee cuatro funciones principales:**
 
 :::{.incremental .medium-par}
 
-- La API está compuesta por 4 _endpoints_ principales
-  - Un _endpoint_ es una ruta dentro de la API que tiene asignada una tarea específica
+- get_catalog()
+
+- get_column()
+
+- get_data()
+
+- get_many_data()
+
+:::
+
+## Principales funciones
+
+
+**get_catalog()**
+
+:::{.incremental .medium-par}
+
+- Nos permite obtener el catálogo de encuestas cargadas en la API
+
+- Posee el parámetro *dataset* para traer solamente los datos de una encuesta en específico
+
+- Veamos como funciona
+
+:::
+
+. . .
+
+**get_columns()**
+
+:::{.incremental .medium-par}
+
+- Nos permite obtener la lista de variables de alguna encuestas
+
+- Posee dos parámetros obligatorios, *dataset* y *version¨* para traer los nombres específicos
+
+- Veamos como funciona
+
+:::
+
+
+
+## Principales funciones
+
+
+**get_data()**
+
+:::{.incremental .medium-par}
+
+- Es la función principal que nos permite traer datasets de una encuesta en específico
+
+- Posee cuatro parámetros: *dataset*, *version*, *col_list* y *save_where*
+
+- *col_list*: nos permite traer solo algunas variables del dataset, lo que alivia mucho la descarga (funciona desde el request)
+
+- *save_where*: Este parametro nos permite definir donde se almacenará el dataset descargado descargados, en tendiendo 3 posibilidades:
+
+  + Si lo seteamos como *"no"* almacena solo en la memoria del ambiente de R
+
+  + Si lo seteamos como *"local"*, almacenará en un directorio llamado **data/** en el Working directory, pero no en el ambiente de R
+
+  + finalmente si seteamos *"both"*, se almacena en ambas partes
   
-- Estos son:
-  - `/data`: Se ingresa `.json` que contiene la encuesta y versión y opcionalmente una lista de columnas. Si no se ingresa lista de columnas devuelve tabla con todas sus columnas, caso contrario se filtran columnas. Esta se devuelve en formato `.json`
-    - `.json` es una forma estándar y flexible de dar formato y estructura a los datos, facilitando su transmisión
+- Veamos como funciona  
+
 :::
 
-
-:::: {.r-stack}
-::: {.fragment .fade-in-then-out }
-Uso:
-
-  <p align="center">
-  <img src="imagenes/get_data_curl.png" style="width:25%; margin-right:20px;"  />
-  <img src="imagenes/get_data_python.png"style="width:30%; margin-right:20px;" />
-  <img src="imagenes/get_data_r.png"style="width:35%; margin-right:20px;" />
-
-</p>
-:::
-
-::: {.fragment .fade-in-then-out }
-Resultado:
-
-<img src="imagenes/output_get_data.png" width="65%" />
-
-:::    
-
-::::
-## La API data INE
+## Principales funciones
 
 
-::: {.medium-par}
-- La API está compuesta por 4 _endpoints_ principales
-  - Un _endpoint_ es una ruta dentro de la API que tiene asignada una tarea específica
-  
-- Estos son:
+**get_many_data()**
 
-  - `/colnames`: se le entrega un dataset y una versión y a cambio entrega las columnas de esa tabla.
+:::{.incremental .medium-par}
+
+- Es la función principal que nos permite traer datasets de una encuesta en específico
+
+- Posee cuatro parámetros: *dataset*, *from*, *to*, *col_list*, *save_where*, *dont_ask_me*, *memory_warning_limit*
+
+- *to* y *from*: nos permiten referirnos a un amplio rango de versiones,
+
+
+
+
+
+- Veamos como funciona
 
 
 :::
 
-
-::: {.fragment}
-Uso:
-
-     http://127.0.0.1:8000/colnames?dataset=epf_gastos&version=viii
-
-
-:::
-
-::: {.fragment}
-Resultado:
-
-     {"data":["index","ï»¿ZONA","FOLIO_V","FOLIO","FE","VARSTRAT","VARUNIT","CCIF","D","G","C","SC","P","GASTO","GLOSA"]}
-
-
-:::
-    
-
-## La API data INE
-
-
-::: {.medium-par}
-- La API está compuesta por 4 _endpoints_ principales
-  - Un _endpoint_ es una ruta dentro de la API que tiene asignada una tarea específica
-  
-- Estos son:
-
-  - `/info`: entrega metadatos de las tablas disponibles. Opcionalmente se puede ingresar una encuesta para filtrar, obteniendo
-  los metadatos de las tablas asociadas a esa encuesta
-
-
-:::
-
-::: {.fragment}
-Uso:
-
-     http://127.0.0.1:8000/info?dataset_filter=epf_gastos
-
-
-:::
-
-::: {.fragment}
-Resultado:
-
-     "[{\"survey\":\"epf_gastos\",\"version\":\"vii\",\"n_row\":641938,\"n_col\":12,\"file_size\":32763938},{\"survey\":\"epf_gastos\",\"version\":\"viii\",\"n_row\":1064239,\"n_col\":15,\"file_size\":85938002}]"
-
-
-:::
-   
-
-## La API data INE
-
-
-::: {.medium-par}
-- La API está compuesta por 4 _endpoints_ principales
-  - Un _endpoint_ es una ruta dentro de la API que tiene asignada una tarea específica
-  
-- Estos son:
-
-  - `/uploadfile`: permite subir tablas nuevas, que podrán ser consultadas en un futuro.
-    - Solo para administradores de la API.
-    - Es posible que este _endpoint_ cambie considerablemente.
-
-
-:::
-
-::: {.fragment}
-UI al ingresar al endpoint:
-
-<img src="imagenes/uploadfile.png" style="width:60%; margin-right:20px;" />
-
-:::
-
-## API en acción
-
-Al entrar a la URL, se nos envía directamente a la documentación, que, junto con explicar cada _endpoint_
-nos permite probarlos.
-
-[Probemos la api!](http://127.0.0.1:8000/)
 
 
 
 
 
 #
+
+[]{.linea-superior} 
+[]{.linea-inferior} 
 
 <img src="imagenes/logo_portada2.png" width="20%"/>  
 
@@ -231,11 +215,5 @@ nos permite probarlos.
 [**API data INE y paquetes asociados**]{.big-par .center-justified}
 
 [**Octubre 2023**]{.big-par .center-justified}
-
-
-
-
-[]{.linea-superior} 
-[]{.linea-inferior} 
 
 
