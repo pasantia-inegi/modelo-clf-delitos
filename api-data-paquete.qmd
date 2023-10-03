@@ -87,7 +87,9 @@ de conocer en detalle cómo funciona este otro.
 :::
 
 
+## ¿Qué es una API?
 
+<img src="imagenes/rest-api.jpg" width="100%" style="float: right;" />
 
 
 ## Uso y motivación
