@@ -49,6 +49,15 @@ engine: knitr
 [**octubre 2023**]{.big-par .center-justified}
 
 
+## Temario
+
+1. Componentes del proyecto
+2. ¿Qué es una API?
+3. API data INE
+4. API en acción
+4. Paquete INE-data
+
+
 ## Componentes del proyecto
 
 - API (80% ok)
@@ -59,11 +68,12 @@ engine: knitr
 
 
 
+
 ## ¿Qué es una API?
 
 
 
-
+::: {.incremental}
 - Las APIs (_Application Programming Interface_) son piezas de código que permiten que dos aplicaciones o computadoras se comuniquen.
 
 - Se podría decir que la API es un intermediario que permite a que un programa le pida cosas específicas a otro programa, sin necesidad 
@@ -74,13 +84,7 @@ de conocer en detalle cómo funciona este otro.
    De otra manera no tendríamos acceso o bien tendríamos que hacerlo pasando por la página web, lo que implica un proceso más costoso para el usuario y para el proveedor.
 
 - Ejemplos clásicos de APIs: API de twitter para recolectar tuits, API de la CMF para valor UF, monedas extranjeras, IPC, etc.
-
-
-
-## ¿Qué es una API?
-
-
-<img src="imagenes/rest-api.jpg" width="100%" style="float: right;" />
+:::
 
 
 
@@ -88,13 +92,144 @@ de conocer en detalle cómo funciona este otro.
 
 ## Uso y motivación
 
-- La API del INE da acceso directo a las tablas publicadas por el INE, además de entregar información como nombres de las columnas,
+:::{.incremental .medium-par}
+- La API del INE da acceso directo a las tablas publicadas por el INE, evitándole a sus usuarios pasar
+por la página web, además de entregar información como nombres de las columnas,
 metadatos varios y nombres de las posibles tablas a consultar.
   - Actualmente se encuentran disponibles EPF, ENUSC, ESI y ENE
   
 - La idea de su creación es facilitar el acceso a datos a usuarios más avanzados, que conocen este tipo de herramientas.
 
-- El paquete, además, permite acceder a la API en un formato más familiar
+- El paquete, además, permite acceder a la API en un formato más familiar, que sea cómodo para usuarios y usuarias de nivel intermedio
+:::
+
+## La API data INE
+
+:::{.incremental .medium-par}
+
+- La API está compuesta por 4 _endpoints_ principales
+  - Un _endpoint_ es una ruta dentro de la API que tiene asignada una tarea específica
+  
+- Estos son:
+  - `/data`: Se ingresa `.json` que contiene la encuesta y versión y opcionalmente una lista de columnas. Si no se ingresa lista de columnas devuelve tabla con todas sus columnas, caso contrario se filtran columnas. Esta se devuelve en formato `.json`
+    - `.json` es una forma estándar y flexible de dar formato y estructura a los datos, facilitando su transmisión
+:::
+
+
+:::: {.r-stack}
+::: {.fragment .fade-in-then-out }
+Uso:
+
+  <p align="center">
+  <img src="imagenes/get_data_curl.png" style="width:25%; margin-right:20px;"  />
+  <img src="imagenes/get_data_python.png"style="width:30%; margin-right:20px;" />
+  <img src="imagenes/get_data_r.png"style="width:35%; margin-right:20px;" />
+
+</p>
+:::
+
+::: {.fragment .fade-in-then-out }
+Resultado:
+
+<img src="imagenes/output_get_data.png" width="65%" />
+
+:::    
+
+::::
+## La API data INE
+
+
+::: {.medium-par}
+- La API está compuesta por 4 _endpoints_ principales
+  - Un _endpoint_ es una ruta dentro de la API que tiene asignada una tarea específica
+  
+- Estos son:
+
+  - `/colnames`: se le entrega un dataset y una versión y a cambio entrega las columnas de esa tabla.
+
+
+:::
+
+
+::: {.fragment}
+Uso:
+
+     http://127.0.0.1:8000/colnames?dataset=epf_gastos&version=viii
+
+
+:::
+
+::: {.fragment}
+Resultado:
+
+     {"data":["index","ï»¿ZONA","FOLIO_V","FOLIO","FE","VARSTRAT","VARUNIT","CCIF","D","G","C","SC","P","GASTO","GLOSA"]}
+
+
+:::
+    
+
+## La API data INE
+
+
+::: {.medium-par}
+- La API está compuesta por 4 _endpoints_ principales
+  - Un _endpoint_ es una ruta dentro de la API que tiene asignada una tarea específica
+  
+- Estos son:
+
+  - `/info`: entrega metadatos de las tablas disponibles. Opcionalmente se puede ingresar una encuesta para filtrar, obteniendo
+  los metadatos de las tablas asociadas a esa encuesta
+
+
+:::
+
+::: {.fragment}
+Uso:
+
+     http://127.0.0.1:8000/info?dataset_filter=epf_gastos
+
+
+:::
+
+::: {.fragment}
+Resultado:
+
+     "[{\"survey\":\"epf_gastos\",\"version\":\"vii\",\"n_row\":641938,\"n_col\":12,\"file_size\":32763938},{\"survey\":\"epf_gastos\",\"version\":\"viii\",\"n_row\":1064239,\"n_col\":15,\"file_size\":85938002}]"
+
+
+:::
+   
+
+## La API data INE
+
+
+::: {.medium-par}
+- La API está compuesta por 4 _endpoints_ principales
+  - Un _endpoint_ es una ruta dentro de la API que tiene asignada una tarea específica
+  
+- Estos son:
+
+  - `/uploadfile`: permite subir tablas nuevas, que podrán ser consultadas en un futuro.
+    - Solo para administradores de la API.
+    - Es posible que este _endpoint_ cambie considerablemente.
+
+
+:::
+
+::: {.fragment}
+UI al ingresar al endpoint:
+
+<img src="imagenes/uploadfile.png" style="width:60%; margin-right:20px;" />
+
+:::
+
+## API en acción
+
+Al entrar a la URL, se nos envía directamente a la documentación, que, junto con explicar cada _endpoint_
+nos permite probarlos.
+
+[Probemos la api!](http://127.0.0.1:8000/)
+
 
 
 ## Paquete INE-data
