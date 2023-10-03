@@ -183,16 +183,13 @@ Las encuestas disponibles son: **ene epf_personas epf_gastos enusc esi**
 
 - Es la función principal que nos permite traer datasets de una encuesta en específico
 
-- Posee cuatro parámetros: *dataset*, *from*, *to*, *col_list*, *save_where*, *dont_ask_me*, *memory_warning_limit*
+- Posee seis parámetros: *dataset*, *from*, *to*, *col_list*, *save_where*, *memory_warning_limit*
 
-- *to* y *from*: nos permiten referirnos a un amplio rango de versiones,
+- *to* y *from*: nos permiten llamar a un rango de versiones
 
-
-
-
+- *memory_warning_limit*: permite setear el limite de memoria que gatilla el warning, al descargar en la memoria de R
 
 - Veamos como funciona
-
 
 :::
 
