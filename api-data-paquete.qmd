@@ -1,0 +1,135 @@
+---
+# title: "Capacitación en R y herramientas de productividad"
+# author: "Abril 2021"
+format:
+  # html:
+  #   code-fold: true
+  revealjs:
+    auto-stretch: false
+    margin: 0
+    slide-number: true
+    scrollable: true
+    preview-links: auto
+    page-layout: custom
+    logo: imagenes/logo_portada2.png
+    css: ine_quarto_styles.css
+    # footer: <https://quarto.org>
+engine: knitr
+---
+
+#
+
+<!---
+# TODO: this does not work
+ .linea-superior[]
+.linea-inferior[] 
+--->
+
+<!---
+# TODO: this does not work
+ ![](imagenes/logo_portada2.png){.center style="width: 20%;"}   
+--->
+
+[]{.linea-superior} 
+[]{.linea-inferior} 
+
+
+<!---
+ <img src="imagenes/logo_portada2.png" style="width: 20%"/>  
+--->
+
+<img src="imagenes/logo_portada2.png" width="20%"/>  
+
+[**Inducciones PCD**]{.big-par .center-justified}
+
+[**Proyecto Ciencia de Datos**]{.big-par .center-justified}
+
+[**Mentoría a Censo: API Data INE y paquetes asociados**]{.big-par .center-justified}
+
+[**octubre 2023**]{.big-par .center-justified}
+
+
+
+## ¿Qué es una API?
+
+
+
+
+- Las APIs (_Application Programming Interface_) son piezas de código que permiten que dos aplicaciones o computadoras se comuniquen.
+
+- Se podría decir que la API es un intermediario que permite a que un programa le pida cosas específicas a otro programa, sin necesidad 
+de conocer en detalle cómo funciona este otro.
+
+
+- En la práctica, nos permiten acceder desde un programa en nuestro computador -como Python o R- a los datos de algún servicio,
+   De otra manera no tendríamos acceso o bien tendríamos que hacerlo pasando por la página web, lo que implica un proceso más costoso para el usuario y para el proveedor.
+
+- Ejemplos clásicos de APIs: API de twitter para recolectar tuits, API de la CMF para valor UF, monedas extranjeras, IPC, etc.
+
+
+
+## ¿Qué es una API?
+
+
+<img src="imagenes/rest-api.jpg" width="100%" style="float: right;" />
+
+
+
+
+
+## Uso y motivación
+
+- La API del INE da acceso directo a las tablas publicadas por el INE, además de entregar información como nombres de las columnas,
+metadatos varios y nombres de las posibles tablas a consultar.
+  - Actualmente se encuentran disponibles EPF, ENUSC, ESI y ENE
+  
+- La idea de su creación es facilitar el acceso a datos a usuarios más avanzados, que conocen este tipo de herramientas.
+
+- El paquete, además, permite acceder a la API en un formato más familiar
+
+
+
+## Motivación
+
+- Lw
+
+
+<img src="imagenes/logo_portada2.png" width="20%"/>  
+
+[**Inducciones PCD**]{.big-par .center-justified}
+
+[**Proyecto Ciencia de Datos**]{.big-par .center-justified}
+
+[**API data INE y paquetes asociados**]{.big-par .center-justified}
+
+[**Octubre 2023**]{.big-par .center-justified}
+
+
+
+
+[]{.linea-superior} 
+[]{.linea-inferior} 
+
+<!---
+ ## Polar Axis  
+
+For a demonstration of a line plot on a polar axis, see @fig-polar.
+
+```{python}
+#| label: fig-polar
+#| fig-cap: "A line plot on a polar axis, not a bear"
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 4 * np.pi * r
+fig, ax = plt.subplots(
+  subplot_kw = {'projection': 'polar'} 
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+``` 
+--->
