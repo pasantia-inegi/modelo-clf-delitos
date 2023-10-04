@@ -268,8 +268,7 @@ nos permite probarlos.
 
 El paquete INE-data se conecta a la API y facilita la descarga de datos desde el código de R
 
-
-Las encuestas disponibles son: **ene epf_personas epf_gastos enusc esi**
+. . .
 
 **posee cuatro funciones principales:**
 
@@ -294,7 +293,7 @@ Las encuestas disponibles son: **ene epf_personas epf_gastos enusc esi**
 
 - Nos permite obtener el catálogo de encuestas cargadas en la API
 
-- Posee el parámetro *dataset* para traer solamente los datos de una encuesta en específico
+- Posee el parámetro **dataset** para traer solamente los datos de una encuesta en específico
 
 - Veamos como funciona
 
@@ -306,9 +305,9 @@ Las encuestas disponibles son: **ene epf_personas epf_gastos enusc esi**
 
 :::{.incremental .medium-par}
 
-- Nos permite obtener la lista de variables de alguna encuestas
+- Nos permite obtener los nombres de las variables de alguna encuesta
 
-- Posee dos parámetros obligatorios, *dataset* y *version¨* para traer los nombres específicos
+- Posee dos parámetros obligatorios, **dataset** y **version** para traer los nombres específicos
 
 - Veamos como funciona
 
@@ -323,19 +322,22 @@ Las encuestas disponibles son: **ene epf_personas epf_gastos enusc esi**
 
 :::{.incremental .medium-par}
 
-- Es la función principal que nos permite traer datasets de una encuesta en específico
+- Es la función principal, nos permite traer *un* dataset de una encuesta en específico
 
-- Posee cuatro parámetros: *dataset*, *version*, *col_list* y *save_where*
+- Posee cuatro parámetros: **dataset**, **version**, **col_list** y **save_where**
 
-- *col_list*: nos permite traer solo algunas variables del dataset, lo que alivia mucho la descarga (funciona desde el request)
+- **col_list**: nos permite traer solo algunas variables del dataset, lo que alivia mucho la descarga (funciona desde el request a la api)
 
-- *save_where*: Este parametro nos permite definir donde se almacenará el dataset descargado descargados, en tendiendo 3 posibilidades:
+- **save_where**: Este parametro nos permite definir donde se almacenará el dataset descargado, tiene 4 opciones:
 
-  + Si lo seteamos como *"no"* almacena solo en la memoria del ambiente de R
+  + Si seteamos como **"no"** almacena solo en la memoria del ambiente de R, (tiene un warning y prompt para cuidar la memoria ram)
 
-  + Si lo seteamos como *"local"*, almacenará en un directorio llamado **data/** en el Working directory, pero no en el ambiente de R
+  + Si seteamos como **"local"**, almacenará en un directorio llamado ***data/*** en el Working directory, pero no en el ambiente de R
 
-  + finalmente si seteamos *"both"*, se almacena en ambas partes
+  + Si seteamos **"both"**, se almacena en ambas partes
+  
+  - Finalmente, si seteamos **no_warning**, se apagará el warining y prompt, los datos se cargarán en el ambiente de R, **!!bajo su responsabilidad¡¡**
+  
   
 - Veamos como funciona  
 
@@ -348,18 +350,15 @@ Las encuestas disponibles son: **ene epf_personas epf_gastos enusc esi**
 
 :::{.incremental .medium-par}
 
-- Es la función principal que nos permite traer datasets de una encuesta en específico
+- Es una función *wrapper* de **get_data**, que nos permite traer multiples versiones de un dataset en una sola función
 
-- Posee cuatro parámetros: *dataset*, *from*, *to*, *col_list*, *save_where*, *dont_ask_me*, *memory_warning_limit*
+- Posee seis parámetros: **dataset**, **from**, **to**, **col_list**, **save_where**, **memory_warning_limit**
 
-- *to* y *from*: nos permiten referirnos a un amplio rango de versiones,
+- **to** y **from**: nos permiten llamar a un rango de versiones, generando un vector internamente
 
-
-
-
+- **memory_warning_limit**: permite setear el limite de memoria que gatilla el warning, al descargar en la memoria de R
 
 - Veamos como funciona
-
 
 :::
 
