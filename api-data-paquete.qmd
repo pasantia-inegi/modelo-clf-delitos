@@ -79,10 +79,9 @@ engine: knitr
 de conocer en detalle cómo funciona este otro.
 
 
-- En la práctica, nos permiten acceder desde un programa en nuestro computador -como Python o R- a los datos de algún servicio,
-   De otra manera no tendríamos acceso o bien tendríamos que hacerlo pasando por la página web, lo que implica un proceso más costoso para el usuario y para el proveedor.
+- En la práctica, nos permiten acceder desde un programa en nuestro computador -como Python o R- a los datos de algún servicio, al que de otra manera no tendríamos acceso o bien tendríamos que hacerlo pasando por la página web, lo que implica un proceso más costoso para el usuario y para el proveedor.
 
-- Ejemplos clásicos de APIs: API de twitter para recolectar tuits, API de la CMF para valor UF, monedas extranjeras, IPC, etc.
+- Ejemplos clásicos de APIs son: API de twitter para recolectar tuits, iniciar sesión con Google, API de la CMF para valor UF, monedas extranjeras, IPC, etc.
 :::
 
 ## ¿Qué es una API?
@@ -125,8 +124,8 @@ parte del menú.
 
 :::{.incremental .medium-par}
 - La API del INE da acceso directo a las tablas publicadas por el INE, evitándole a sus usuarios pasar
-por la página web, además de entregar información como nombres de las columnas,
-información descriptiva de las tablas y sus nombres.
+por la página web, además de entregar información como nombres de las columnas e
+información descriptiva de las tablas.
   - Actualmente se encuentran disponibles EPF, ENUSC, ESI y ENE
   
 - La idea de su creación es facilitar el acceso a datos a usuarios más avanzados, que conocen este tipo de herramientas.
