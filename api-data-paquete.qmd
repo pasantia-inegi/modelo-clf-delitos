@@ -43,7 +43,7 @@ engine: knitr
 
 [**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 
-[**Proyecto: API Data INE y paquetes asociados**]{.big-par .center-justified}
+[**Proyecto: API inedata y paquetes asociados**]{.big-par .center-justified}
 
 [**octubre 2023**]{.big-par .center-justified}
 
@@ -52,7 +52,7 @@ engine: knitr
 
 1. Componentes del proyecto
 2. ¿Qué es una API?
-3. API data INE
+3. API inedata
 4. API en acción
 4. Paquete INE-data
 
@@ -134,7 +134,7 @@ metadatos varios y nombres de las posibles tablas a consultar.
 - El paquete, además, permite acceder a la API en un formato más familiar, que sea cómodo para usuarios y usuarias de nivel intermedio
 :::
 
-## La API data INE
+## La API inedata
 
 :::{.incremental .medium-par}
 
@@ -179,7 +179,7 @@ Resultado:
 :::    
 
 ::::
-## La API data INE
+## La API inedata
 
 
 ::: {.medium-par}
@@ -211,7 +211,7 @@ Resultado:
 :::
     
 
-## La API data INE
+## La API inedata
 
 
 ::: {.medium-par}
@@ -243,7 +243,7 @@ Resultado:
 :::
    
 
-## La API data INE
+## La API inedata
 
 
 ::: {.medium-par}
@@ -388,7 +388,7 @@ El paquete INE-data se conecta a la API y facilita la descarga de datos desde el
 
 [**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 
-[**API data INE y paquetes asociados**]{.big-par .center-justified}
+[**API inedata y paquetes asociados**]{.big-par .center-justified}
 
 [**Octubre 2023**]{.big-par .center-justified}
 
