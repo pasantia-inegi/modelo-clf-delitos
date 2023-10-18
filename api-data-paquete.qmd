@@ -126,7 +126,7 @@ parte del menú.
 :::{.incremental .medium-par}
 - La API del INE da acceso directo a las tablas publicadas por el INE, evitándole a sus usuarios pasar
 por la página web, además de entregar información como nombres de las columnas,
-metadatos varios y nombres de las posibles tablas a consultar.
+información descriptiva de las tablas y sus nombres.
   - Actualmente se encuentran disponibles EPF, ENUSC, ESI y ENE
   
 - La idea de su creación es facilitar el acceso a datos a usuarios más avanzados, que conocen este tipo de herramientas.
@@ -220,8 +220,7 @@ Resultado:
   
 - Estos son:
 
-  - `/info`: entrega metadatos de las tablas disponibles. Opcionalmente se puede ingresar una encuesta para filtrar, obteniendo
-  los metadatos de las tablas asociadas a esa encuesta
+  - `/info`: entrega información descriptiva de las tablas disponibles. Opcionalmente se puede ingresar una encuesta para filtrar, obteniendo la información de las tablas asociadas a esa encuesta
 
 
 :::
@@ -271,7 +270,7 @@ UI al ingresar al endpoint:
 Al entrar a la URL, se nos envía directamente a la documentación, que, junto con explicar cada _endpoint_
 nos permite probarlos.
 
-[Probemos la api!](http://127.0.0.1:8000/)
+Probemos la api!
 
 
 
