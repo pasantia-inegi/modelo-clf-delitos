@@ -153,10 +153,22 @@ metadatos varios y nombres de las posibles tablas a consultar.
 Uso:
 
   <p align="center">
-  <img src="imagenes/get_data_curl.png" style="width:25%; margin-right:20px;"  />
-  <img src="imagenes/get_data_python.png"style="width:30%; margin-right:20px;" />
-  <img src="imagenes/get_data_r.png"style="width:35%; margin-right:20px;" />
+  
+::::{.columns}
 
+:::{.column style='flex: 0.3' } 
+  <img src="imagenes/get_data_curl.png" style="width:100%; margin-right:20px;"  />
+:::
+
+:::{.column style='flex: 0.3' } 
+  <img src="imagenes/get_data_python.png"style="width:100%; margin-right:20px;" />
+:::
+
+:::{.column style='flex: 0.3' } 
+  <img src="imagenes/get_data_r.png"style="width:100%; margin-right:20px;" />
+:::
+
+::::
 </p>
 :::
 
