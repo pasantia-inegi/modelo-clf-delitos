@@ -38,7 +38,7 @@ engine: knitr
  <img src="imagenes/logo_portada2.png" style="width: 20%"/>  
 --->
 
-<img src="imagenes/logo_portada2.png" width="20%"/>  
+[<img src="imagenes/logo_portada2.png" width="20%"/> ]{.center-justified}
 
 [**Inducciones PCD**]{.big-par .center-justified}
 
@@ -88,7 +88,7 @@ de conocer en detalle cómo funciona este otro.
 
 ## ¿Qué es una API?
 
-::::columns
+::::{.columns}
 
 :::{.column style='flex: 0.45' .medium-par} 
 La analogía del restaurant es práctica para entender la lógica de las API:
