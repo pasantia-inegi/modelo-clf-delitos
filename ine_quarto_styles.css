@@ -149,7 +149,28 @@ Settings for margins, aligments, etc.
 }
 img, video, iframe {
   max-width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify;
+  text-justify: auto;
+  text-align-last: center;
 }
+
+.reveal img {
+      max-width: 100%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: justify;
+      text-justify: auto;
+      text-align-last: center;
+}
+
+
+
+
+
 blockquote {
   border-left: solid 5px #FF961C80;
   padding-left: 1em;
