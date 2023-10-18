@@ -40,7 +40,6 @@ engine: knitr
 
 [<img src="imagenes/logo_portada2.png" width="20%"/> ]{.center-justified}
 
-[**Inducciones PCD**]{.big-par .center-justified}
 
 [**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 
@@ -386,7 +385,6 @@ El paquete INE-data se conecta a la API y facilita la descarga de datos desde el
 
 <img src="imagenes/logo_portada2.png" width="20%"/>  
 
-[**Inducciones PCD**]{.big-par .center-justified}
 
 [**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 
