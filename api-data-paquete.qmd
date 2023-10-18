@@ -300,13 +300,13 @@ El paquete INE-data se conecta a la API y facilita la descarga de datos desde el
 
 - **save_where**: Este parametro nos permite definir donde se almacenará el dataset descargado, tiene 4 opciones:
 
-  + Si seteamos como **"no"** almacena solo en la memoria del ambiente de R, (tiene un warning y prompt para cuidar la memoria ram)
+  + Si seteamos como **"renviron"** almacena solo en la memoria del ambiente de R, (tiene un warning y prompt para cuidar la memoria ram)
 
-  + Si seteamos como **"local"**, almacenará en un directorio llamado ***data/*** en el Working directory, pero no en el ambiente de R
+  + Si seteamos como **"disk"**, almacenará en un directorio llamado ***data/*** en el Working directory, pero no en el ambiente de R
 
   + Si seteamos **"both"**, se almacena en ambas partes
   
-  - Finalmente, si seteamos **no_warning**, se apagará el warining y prompt, los datos se cargarán en el ambiente de R, **!!bajo su responsabilidad¡¡**
+  - Finalmente, si seteamos **no_message**, se apagará el warining y prompt, los datos se cargarán en el ambiente de R, **!!bajo su responsabilidad¡¡**
   
   
 - Veamos como funciona  
