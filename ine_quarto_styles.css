@@ -52,6 +52,7 @@ They have effect on all the elements of a particular kind which are found in the
 
 .reveal section p {
   font-size: var(--text-font-size); /* Adjust the font size */
+  text-align: left;
   line-height: 1.;
 }
 
@@ -237,7 +238,7 @@ Settings for columns
 
 .column {
   flex: 1;
-  padding: 20px;
+  padding: 2px;
   text-align: center;
 }
 
