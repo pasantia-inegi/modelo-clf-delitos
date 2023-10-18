@@ -54,7 +54,7 @@ engine: knitr
 2. ¿Qué es una API?
 3. API inedata
 4. API en acción
-4. Paquete INE-data
+4. Paquete dataine
 
 
 ## Componentes del proyecto
@@ -274,9 +274,10 @@ Probemos la api!
 
 
 
-## Paquete INE-data
 
-El paquete INE-data se conecta a la API y facilita la descarga de datos desde el código de R
+## Paquete dataine
+
+El paquete dataine se conecta a la API y facilita la descarga de datos desde el código de R
 
 . . .
 
@@ -346,7 +347,7 @@ El paquete INE-data se conecta a la API y facilita la descarga de datos desde el
 
   + Si seteamos **"both"**, se almacena en ambas partes
   
-  - Finalmente, si seteamos **no_message**, se apagará el warining y prompt, los datos se cargarán en el ambiente de R, **!!bajo su responsabilidad¡¡**
+  - Finalmente, si seteamos **no_message**, se apagará el _warning_ y prompt, los datos se cargarán en el ambiente de R, **!!bajo su responsabilidad¡¡**
   
   
 - Veamos como funciona  
@@ -373,7 +374,17 @@ El paquete INE-data se conecta a la API y facilita la descarga de datos desde el
 :::
 
 
+## Pasos a seguir
 
+:::{.incremental }
+
+- Prepararación para apertura al público (seguridad, conversaciones con SDTI)
+- Ampliar el número de productos disponibles
+- Incluir datos de series de tiempo de indicadores económicos (desempleo, IPC, etc)
+- Reformar el método de subida de datos nuevos  y su autentificación
+- Replicar el paquete dataine en Python
+
+:::
 
 
 

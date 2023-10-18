@@ -359,7 +359,7 @@
 <li>¿Qué es una API?</li>
 <li>API inedata</li>
 <li>API en acción</li>
-<li>Paquete INE-data</li>
+<li>Paquete dataine</li>
 </ol>
 </section>
 <section id="componentes-del-proyecto" class="slide level2">
@@ -409,7 +409,7 @@
 <h2>Uso y motivación</h2>
 <div class="medium-par">
 <ul>
-<li class="fragment"><p>La API del INE da acceso directo a las tablas publicadas por el INE, evitándole a sus usuarios pasar por la página web, además de entregar información como nombres de las columnas, metadatos varios y nombres de las posibles tablas a consultar.</p>
+<li class="fragment"><p>La API del INE da acceso directo a las tablas publicadas por el INE, evitándole a sus usuarios pasar por la página web, además de entregar información como nombres de las columnas, información descriptiva de las tablas y sus nombres.</p>
 <ul>
 <li class="fragment">Actualmente se encuentran disponibles EPF, ENUSC, ESI y ENE</li>
 </ul></li>
@@ -489,7 +489,7 @@
 </ul></li>
 <li><p>Estos son:</p>
 <ul>
-<li><code>/info</code>: entrega metadatos de las tablas disponibles. Opcionalmente se puede ingresar una encuesta para filtrar, obteniendo los metadatos de las tablas asociadas a esa encuesta</li>
+<li><code>/info</code>: entrega información descriptiva de las tablas disponibles. Opcionalmente se puede ingresar una encuesta para filtrar, obteniendo la información de las tablas asociadas a esa encuesta</li>
 </ul></li>
 </ul>
 </div>
@@ -528,11 +528,11 @@
 <section id="api-en-acción" class="slide level2">
 <h2>API en acción</h2>
 <p>Al entrar a la URL, se nos envía directamente a la documentación, que, junto con explicar cada <em>endpoint</em> nos permite probarlos.</p>
-<p><a href="http://127.0.0.1:8000/">Probemos la api!</a></p>
+<p>Probemos la api!</p>
 </section>
-<section id="paquete-ine-data" class="slide level2">
-<h2>Paquete INE-data</h2>
-<p>El paquete INE-data se conecta a la API y facilita la descarga de datos desde el código de R</p>
+<section id="paquete-dataine" class="slide level2">
+<h2>Paquete dataine</h2>
+<p>El paquete dataine se conecta a la API y facilita la descarga de datos desde el código de R</p>
 <div class="fragment">
 <p><strong>posee cuatro funciones principales:</strong></p>
 <div class="medium-par">
@@ -579,7 +579,7 @@
 <li class="fragment"><p>Si seteamos como <strong>“renviron”</strong> almacena solo en la memoria del ambiente de R, (tiene un warning y prompt para cuidar la memoria ram)</p></li>
 <li class="fragment"><p>Si seteamos como <strong>“disk”</strong>, almacenará en un directorio llamado <strong><em>data/</em></strong> en el Working directory, pero no en el ambiente de R</p></li>
 <li class="fragment"><p>Si seteamos <strong>“both”</strong>, se almacena en ambas partes</p></li>
-<li class="fragment"><p>Finalmente, si seteamos <strong>no_message</strong>, se apagará el warining y prompt, los datos se cargarán en el ambiente de R, <strong>!!bajo su responsabilidad¡¡</strong></p></li>
+<li class="fragment"><p>Finalmente, si seteamos <strong>no_message</strong>, se apagará el <em>warning</em> y prompt, los datos se cargarán en el ambiente de R, <strong>!!bajo su responsabilidad¡¡</strong></p></li>
 </ul></li>
 <li class="fragment"><p>Veamos como funciona</p></li>
 </ul>
@@ -595,6 +595,18 @@
 <li class="fragment"><p><strong>to</strong> y <strong>from</strong>: nos permiten llamar a un rango de versiones, generando un vector internamente</p></li>
 <li class="fragment"><p><strong>memory_warning_limit</strong>: permite setear el limite de memoria que gatilla el warning, al descargar en la memoria de R</p></li>
 <li class="fragment"><p>Veamos como funciona</p></li>
+</ul>
+</div>
+</section>
+<section id="pasos-a-seguir" class="slide level2">
+<h2>Pasos a seguir</h2>
+<div>
+<ul>
+<li class="fragment">Prepararación para apertura al público (seguridad, conversaciones con SDTI)</li>
+<li class="fragment">Ampliar el número de productos disponibles</li>
+<li class="fragment">Incluir datos de series de tiempo de indicadores económicos (desempleo, IPC, etc)</li>
+<li class="fragment">Reformar el método de subida de datos nuevos y su autentificación</li>
+<li class="fragment">Replicar el paquete dataine en Python</li>
 </ul>
 </div>
 </section></section>
