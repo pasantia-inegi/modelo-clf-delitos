@@ -43,27 +43,23 @@ engine: knitr
 
 [**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 
-[**Proyecto: API inedata y paquetes asociados**]{.big-par .center-justified}
+[**Proyecto: Modelo y API predicción de delitos**]{.big-par .center-justified}
 
-[**octubre 2023**]{.big-par .center-justified}
+[**Enero 2024**]{.big-par .center-justified}
 
 
 ## Temario
 
-1. Componentes del proyecto
+1. [INSERTE JAVI]
 2. ¿Qué es una API?
-3. API inedata
-4. API en acción
-4. Paquete dataine
+3. API modelo delitos
+4. Uso de API en el browser
+5. Uso programático de la API
 
 
-## Componentes del proyecto
+## [PARTE I JAVI]
 
-- API (80% ok)
 
-- Paquete en R (95% ok)
-
-- Paquete en Python (0% )
 
 
 
@@ -274,106 +270,12 @@ Probemos la api!
 
 
 
-## Paquete dataine
-
-El paquete dataine se conecta a la API y facilita la descarga de datos desde el código de R
-
-. . .
-
-**posee cuatro funciones principales:**
-
-:::{.incremental .medium-par}
-
-- get_catalog()
-
-- get_columns()
-
-- get_data()
-
-- get_many_data()
-
-:::
-
-## Principales funciones
-
-
-**get_catalog()**
-
-:::{.incremental .medium-par}
-
-- Nos permite obtener el catálogo de encuestas cargadas en la API
-
-- Posee el parámetro **dataset** para traer solamente los datos de una encuesta en específico
-
-- Veamos como funciona
-
-:::
-
-. . .
-
-**get_columns()**
-
-:::{.incremental .medium-par}
-
-- Nos permite obtener los nombres de las variables de alguna encuesta
-
-- Posee dos parámetros obligatorios, **dataset** y **version** para traer los nombres específicos
-
-- Veamos como funciona
-
-:::
+## Uso programático de la API (Parte II Javi)
 
 
 
-## Principales funciones
 
-
-**get_data()**
-
-:::{.incremental .medium-par}
-
-- Es la función principal, nos permite traer *un* dataset de una encuesta en específico
-
-- Posee cuatro parámetros: **dataset**, **version**, **col_list** y **save_where**
-
-- **col_list**: nos permite traer solo algunas variables del dataset, lo que alivia mucho la descarga (funciona desde el request a la api)
-
-- **save_where**: Este parametro nos permite definir donde se almacenará el dataset descargado, tiene 4 opciones:
-
-  + Si seteamos como **"renviron"** almacena solo en la memoria del ambiente de R, (tiene un warning y prompt para cuidar la memoria ram)
-
-  + Si seteamos como **"disk"**, almacenará en un directorio llamado ***data/*** en el Working directory, pero no en el ambiente de R
-
-  + Si seteamos **"both"**, se almacena en ambas partes
-  
-  - Finalmente, si seteamos **no_message**, se apagará el _warning_ y prompt, los datos se cargarán en el ambiente de R, **!!bajo su responsabilidad¡¡**
-  
-  
-- Veamos como funciona  
-
-:::
-
-## Principales funciones
-
-
-**get_many_data()**
-
-:::{.incremental .medium-par}
-
-- Es una función *wrapper* de **get_data**, que nos permite traer multiples versiones de un dataset en una sola función
-
-- Posee seis parámetros: **dataset**, **from**, **to**, **col_list**, **save_where**, **memory_warning_limit**
-
-- **to** y **from**: nos permiten llamar a un rango de versiones, generando un vector internamente
-
-- **memory_warning_limit**: permite setear el limite de memoria que gatilla el warning, al descargar en la memoria de R
-
-- Veamos como funciona
-
-:::
-
-
-## Pasos a seguir
+## ¿Conclusiones?
 
 :::{.incremental }
 
@@ -397,8 +299,8 @@ El paquete dataine se conecta a la API y facilita la descarga de datos desde el 
 
 [**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 
-[**API inedata y paquetes asociados**]{.big-par .center-justified}
+[**Proyecto: Modelo y API predicción de delitos**]{.big-par .center-justified}
 
-[**Octubre 2023**]{.big-par .center-justified}
+[**Enero 2024**]{.big-par .center-justified}
 
 
