@@ -344,26 +344,21 @@
 --->
 <p><span class="center-justified"><img src="imagenes/logo_portada2.png" width="20%"></span></p>
 <p><span class="big-par center-justified"><strong>Proyecto Ciencia de Datos</strong></span></p>
-<p><span class="big-par center-justified"><strong>Proyecto: API inedata y paquetes asociados</strong></span></p>
-<p><span class="big-par center-justified"><strong>octubre 2023</strong></span></p>
+<p><span class="big-par center-justified"><strong>Proyecto: Modelo y API predicción de delitos</strong></span></p>
+<p><span class="big-par center-justified"><strong>Enero 2024</strong></span></p>
 </section>
 <section id="temario" class="slide level2">
 <h2>Temario</h2>
 <ol type="1">
-<li>Componentes del proyecto</li>
+<li>[INSERTE JAVI]</li>
 <li>¿Qué es una API?</li>
-<li>API inedata</li>
-<li>API en acción</li>
-<li>Paquete dataine</li>
+<li>API modelo delitos</li>
+<li>Uso de API en el browser</li>
+<li>Uso programático de la API</li>
 </ol>
 </section>
-<section id="componentes-del-proyecto" class="slide level2">
-<h2>Componentes del proyecto</h2>
-<ul>
-<li><p>API (80% ok)</p></li>
-<li><p>Paquete en R (95% ok)</p></li>
-<li><p>Paquete en Python (0% )</p></li>
-</ul>
+<section id="parte-i-javi" class="slide level2">
+<h2>[PARTE I JAVI]</h2>
 </section>
 <section id="qué-es-una-api" class="slide level2">
 <h2>¿Qué es una API?</h2>
@@ -376,10 +371,11 @@
 </ul>
 </div>
 </section>
-<section id="qué-es-una-api-1" class="slide level2">
+<section id="qué-es-una-api-1" class="slide level2 medium-par">
 <h2>¿Qué es una API?</h2>
-<div class="columns">
-<div class="column medium-par" style="flex: 0.45">
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="fragment quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p>La analogía del restaurant es práctica para entender la lógica de las API:</p>
 <ul>
 <li>El usuario/a sería el cliente</li>
@@ -387,14 +383,16 @@
 <li>La información que nos puede disponibilizar la API es el menú</li>
 <li>Los servidores con sus bases de datos serían la cocina</li>
 </ul>
-</div><div class="column medium-par" style="flex: 0.45">
+</div>
+<div class="fragment quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p>Por lo tanto:</p>
 <ul>
 <li>El usuario le pide a la API una información específica (el plato) en base a lo disponible en el menú. Luego, los servidores/cocina se encargan de obtener esa información desde las bases de datos y finalmente la API le entrega el plato/información al usuario, si es que este es parte del menú.</li>
 </ul>
 </div>
 </div>
-<p><span class="center"><img src="imagenes/api_restaurant.webp" width="60%"></span></p>
+</div>
+<p><img data-src="imagenes/api_restaurant.webp" style="width:60.0%"></p>
 </section>
 <section id="qué-es-una-api-2" class="slide level2">
 <h2>¿Qué es una API?</h2>
@@ -404,26 +402,27 @@
 <h2>Uso y motivación</h2>
 <div class="medium-par">
 <ul>
-<li class="fragment"><p>La API del INE da acceso directo a las tablas publicadas por el INE, evitándole a sus usuarios pasar por la página web, además de entregar información como nombres de las columnas e información descriptiva de las tablas.</p>
+<li class="fragment"><p>Esta API permite abstraer la clasificación de delitos de la programación, facilitando el acceso a cualquier persona usuaria que pueda seguir el manual de uso.</p></li>
+<li class="fragment"><p>La API tiene un objetivo principal y dos secundarios:</p>
 <ul>
-<li class="fragment">Actualmente se encuentran disponibles EPF, ENUSC, ESI y ENE</li>
+<li class="fragment">Permitir, de manera sencilla, la predicción de categorías de delito, en base a los modelos <em>Deep Learning</em> que fueron desarrollados.</li>
+<li class="fragment">Entregar acceso restringido a los datos de entrenamiento de los modelos.</li>
+<li class="fragment">Entregar métricas de calidad de predicción de los modelos.</li>
 </ul></li>
-<li class="fragment"><p>La idea de su creación es facilitar el acceso a datos a usuarios más avanzados, que conocen este tipo de herramientas.</p></li>
-<li class="fragment"><p>El paquete, además, permite acceder a la API en un formato más familiar, que sea cómodo para usuarios y usuarias de nivel intermedio</p></li>
 </ul>
 </div>
 </section>
-<section id="la-api-inedata" class="slide level2">
-<h2>La API inedata</h2>
+<section id="la-api" class="slide level2">
+<h2>La API</h2>
 <div class="medium-par">
 <ul>
-<li class="fragment">La API está compuesta por 4 <em>endpoints</em> principales
+<li class="fragment">La API está compuesta por 3 <em>endpoints</em> principales y 2 <em>endpoints</em> asociados a la autentificación
 <ul>
 <li class="fragment">Un <em>endpoint</em> es una ruta dentro de la API que tiene asignada una tarea específica</li>
 </ul></li>
 <li class="fragment">Estos son:
 <ul>
-<li class="fragment"><code>/data</code>: Se ingresa <code>.json</code> que contiene la encuesta y versión y opcionalmente una lista de columnas. Si no se ingresa lista de columnas devuelve tabla con todas sus columnas, caso contrario se filtran columnas. Esta se devuelve en formato <code>.json</code>
+<li class="fragment"><code>/predecir</code>: Se ingresa lista con glosas de delitos a predecir y parámetro <code>tipo_modelo</code> que puede tomar valores <code>modelo_15_clases</code> o <code>modelo_16_clasees</code> y devuelve dos objetos por cada glosa: el primero contiene las probabilidades calculadas asociadas a cada delito, junto con el nombre del delito. El segundo, contiene el nombre del delito que tuvo la probabilidad más alta calculada por el modelo seleccionado. Esta se devuelve en formato <code>.json</code>
 <ul>
 <li class="fragment"><code>.json</code> es una forma estándar y flexible de dar formato y estructura a los datos, facilitando su transmisión</li>
 </ul></li>
@@ -433,17 +432,19 @@
 <div class="r-stack">
 <div class="fragment fade-in-then-out">
 <p>Uso:</p>
-<p align="center">
-</p><div class="columns">
-<div class="column" style="flex: 0.3">
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="imagenes/get_data_curl.png" style="width:100%; margin-right:20px;"></p>
-</div><div class="column" style="flex: 0.3">
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="imagenes/get_data_python.png" style="width:100%; margin-right:20px;"></p>
-</div><div class="column" style="flex: 0.3">
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="imagenes/get_data_r.png" style="width:100%; margin-right:20px;"></p>
 </div>
 </div>
-<p></p>
+</div>
 </div>
 <div class="fragment fade-in-then-out">
 <p>Resultado:</p>
@@ -451,7 +452,7 @@
 </div>
 </div>
 </section>
-<section id="la-api-inedata-1" class="slide level2">
+<section id="la-api-inedata" class="slide level2">
 <h2>La API inedata</h2>
 <div class="medium-par">
 <ul>
@@ -474,7 +475,7 @@
 <pre><code> {"data":["index","ï»¿ZONA","FOLIO_V","FOLIO","FE","VARSTRAT","VARUNIT","CCIF","D","G","C","SC","P","GASTO","GLOSA"]}</code></pre>
 </div>
 </section>
-<section id="la-api-inedata-2" class="slide level2">
+<section id="la-api-inedata-1" class="slide level2">
 <h2>La API inedata</h2>
 <div class="medium-par">
 <ul>
@@ -497,7 +498,7 @@
 <pre><code> "[{\"survey\":\"epf_gastos\",\"version\":\"vii\",\"n_row\":641938,\"n_col\":12,\"file_size\":32763938},{\"survey\":\"epf_gastos\",\"version\":\"viii\",\"n_row\":1064239,\"n_col\":15,\"file_size\":85938002}]"</code></pre>
 </div>
 </section>
-<section id="la-api-inedata-3" class="slide level2">
+<section id="la-api-inedata-2" class="slide level2">
 <h2>La API inedata</h2>
 <div class="medium-par">
 <ul>
@@ -525,76 +526,11 @@
 <p>Al entrar a la URL, se nos envía directamente a la documentación, que, junto con explicar cada <em>endpoint</em> nos permite probarlos.</p>
 <p>Probemos la api!</p>
 </section>
-<section id="paquete-dataine" class="slide level2">
-<h2>Paquete dataine</h2>
-<p>El paquete dataine se conecta a la API y facilita la descarga de datos desde el código de R</p>
-<div class="fragment">
-<p><strong>posee cuatro funciones principales:</strong></p>
-<div class="medium-par">
-<ul>
-<li class="fragment"><p>get_catalog()</p></li>
-<li class="fragment"><p>get_columns()</p></li>
-<li class="fragment"><p>get_data()</p></li>
-<li class="fragment"><p>get_many_data()</p></li>
-</ul>
-</div>
-</div>
+<section id="uso-programático-de-la-api-parte-ii-javi" class="slide level2">
+<h2>Uso programático de la API (Parte II Javi)</h2>
 </section>
-<section id="principales-funciones" class="slide level2">
-<h2>Principales funciones</h2>
-<p><strong>get_catalog()</strong></p>
-<div class="medium-par">
-<ul>
-<li class="fragment"><p>Nos permite obtener el catálogo de encuestas cargadas en la API</p></li>
-<li class="fragment"><p>Posee el parámetro <strong>dataset</strong> para traer solamente los datos de una encuesta en específico</p></li>
-<li class="fragment"><p>Veamos como funciona</p></li>
-</ul>
-</div>
-<div class="fragment">
-<p><strong>get_columns()</strong></p>
-<div class="medium-par">
-<ul>
-<li class="fragment"><p>Nos permite obtener los nombres de las variables de alguna encuesta</p></li>
-<li class="fragment"><p>Posee dos parámetros obligatorios, <strong>dataset</strong> y <strong>version</strong> para traer los nombres específicos</p></li>
-<li class="fragment"><p>Veamos como funciona</p></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="principales-funciones-1" class="slide level2">
-<h2>Principales funciones</h2>
-<p><strong>get_data()</strong></p>
-<div class="medium-par">
-<ul>
-<li class="fragment"><p>Es la función principal, nos permite traer <em>un</em> dataset de una encuesta en específico</p></li>
-<li class="fragment"><p>Posee cuatro parámetros: <strong>dataset</strong>, <strong>version</strong>, <strong>col_list</strong> y <strong>save_where</strong></p></li>
-<li class="fragment"><p><strong>col_list</strong>: nos permite traer solo algunas variables del dataset, lo que alivia mucho la descarga (funciona desde el request a la api)</p></li>
-<li class="fragment"><p><strong>save_where</strong>: Este parametro nos permite definir donde se almacenará el dataset descargado, tiene 4 opciones:</p>
-<ul>
-<li class="fragment"><p>Si seteamos como <strong>“renviron”</strong> almacena solo en la memoria del ambiente de R, (tiene un warning y prompt para cuidar la memoria ram)</p></li>
-<li class="fragment"><p>Si seteamos como <strong>“disk”</strong>, almacenará en un directorio llamado <strong><em>data/</em></strong> en el Working directory, pero no en el ambiente de R</p></li>
-<li class="fragment"><p>Si seteamos <strong>“both”</strong>, se almacena en ambas partes</p></li>
-<li class="fragment"><p>Finalmente, si seteamos <strong>no_message</strong>, se apagará el <em>warning</em> y prompt, los datos se cargarán en el ambiente de R, <strong>!!bajo su responsabilidad¡¡</strong></p></li>
-</ul></li>
-<li class="fragment"><p>Veamos como funciona</p></li>
-</ul>
-</div>
-</section>
-<section id="principales-funciones-2" class="slide level2">
-<h2>Principales funciones</h2>
-<p><strong>get_many_data()</strong></p>
-<div class="medium-par">
-<ul>
-<li class="fragment"><p>Es una función <em>wrapper</em> de <strong>get_data</strong>, que nos permite traer multiples versiones de un dataset en una sola función</p></li>
-<li class="fragment"><p>Posee seis parámetros: <strong>dataset</strong>, <strong>from</strong>, <strong>to</strong>, <strong>col_list</strong>, <strong>save_where</strong>, <strong>memory_warning_limit</strong></p></li>
-<li class="fragment"><p><strong>to</strong> y <strong>from</strong>: nos permiten llamar a un rango de versiones, generando un vector internamente</p></li>
-<li class="fragment"><p><strong>memory_warning_limit</strong>: permite setear el limite de memoria que gatilla el warning, al descargar en la memoria de R</p></li>
-<li class="fragment"><p>Veamos como funciona</p></li>
-</ul>
-</div>
-</section>
-<section id="pasos-a-seguir" class="slide level2">
-<h2>Pasos a seguir</h2>
+<section id="conclusiones" class="slide level2">
+<h2>¿Conclusiones?</h2>
 <div>
 <ul>
 <li class="fragment">Prepararación para apertura al público (seguridad, conversaciones con SDTI)</li>
@@ -610,8 +546,8 @@
 <p><span class="linea-superior"></span> <span class="linea-inferior"></span></p>
 <p><img src="imagenes/logo_portada2.png" width="20%"></p>
 <p><span class="big-par center-justified"><strong>Proyecto Ciencia de Datos</strong></span></p>
-<p><span class="big-par center-justified"><strong>API inedata y paquetes asociados</strong></span></p>
-<p><span class="big-par center-justified"><strong>Octubre 2023</strong></span></p>
+<p><span class="big-par center-justified"><strong>Proyecto: Modelo y API predicción de delitos</strong></span></p>
+<p><span class="big-par center-justified"><strong>Enero 2024</strong></span></p>
 <p><img src="imagenes/logo_portada2.png" class="slide-logo"></p>
 <div class="footer footer-default">
 

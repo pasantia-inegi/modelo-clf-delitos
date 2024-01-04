@@ -80,11 +80,11 @@ de conocer en detalle cómo funciona este otro.
 - Ejemplos clásicos de APIs son: API de twitter para recolectar tuits, iniciar sesión con Google, API de la CMF para valor UF, monedas extranjeras, IPC, etc.
 :::
 
-## ¿Qué es una API?
+## ¿Qué es una API? {.medium-par}
 
-::::{.columns}
+:::: {layout-ncol=2}
 
-:::{.column style='flex: 0.45' .medium-par} 
+::: fragment
 La analogía del restaurant es práctica para entender la lógica de las API:
 
 - El usuario/a sería el cliente
@@ -95,7 +95,7 @@ La analogía del restaurant es práctica para entender la lógica de las API:
 :::
 
 
-:::{.column style='flex: 0.45' .medium-par} 
+::: fragment
 Por lo tanto:
 
 - El usuario le pide a la API una información específica (el plato) en base a lo disponible 
@@ -106,7 +106,7 @@ parte del menú.
 
 ::::
 
-[<img src="imagenes/api_restaurant.webp" width="60%" />]{.center}
+![](imagenes/api_restaurant.webp){width=60%}
 
 
 ## ¿Qué es una API?
@@ -119,61 +119,74 @@ parte del menú.
 ## Uso y motivación
 
 :::{.incremental .medium-par}
-- La API del INE da acceso directo a las tablas publicadas por el INE, evitándole a sus usuarios pasar
-por la página web, además de entregar información como nombres de las columnas e
-información descriptiva de las tablas.
-  - Actualmente se encuentran disponibles EPF, ENUSC, ESI y ENE
-  
-- La idea de su creación es facilitar el acceso a datos a usuarios más avanzados, que conocen este tipo de herramientas.
+- Esta API permite abstraer la clasificación de delitos de la programación, facilitando el acceso
+a cualquier persona usuaria que pueda seguir el manual de uso.
 
-- El paquete, además, permite acceder a la API en un formato más familiar, que sea cómodo para usuarios y usuarias de nivel intermedio
+- La API tiene un objetivo principal y dos secundarios:
+
+  - Permitir, de manera sencilla, la predicción de categorías de delito, en base a los modelos
+  _Deep Learning_ que fueron desarrollados.
+  - Entregar acceso restringido a los datos de entrenamiento de los modelos.
+  - Entregar métricas de calidad de predicción de los modelos.
+  
+
 :::
 
-## La API inedata
+## La API 
 
 :::{.incremental .medium-par}
 
-- La API está compuesta por 4 _endpoints_ principales
+- La API está compuesta por 3 _endpoints_ principales y  2 _endpoints_ asociados a la autentificación
   - Un _endpoint_ es una ruta dentro de la API que tiene asignada una tarea específica
   
 - Estos son:
-  - `/data`: Se ingresa `.json` que contiene la encuesta y versión y opcionalmente una lista de columnas. Si no se ingresa lista de columnas devuelve tabla con todas sus columnas, caso contrario se filtran columnas. Esta se devuelve en formato `.json`
+  - `/predecir`: Se ingresa lista con glosas de delitos a predecir y parámetro `tipo_modelo` que puede tomar valores `modelo_15_clases` o `modelo_16_clasees` y devuelve dos objetos por cada glosa: el primero contiene las probabilidades calculadas asociadas a cada delito, junto con el nombre del delito. El segundo, contiene el nombre del delito que tuvo la probabilidad más alta calculada por el modelo seleccionado. Esta se devuelve en formato `.json`
     - `.json` es una forma estándar y flexible de dar formato y estructura a los datos, facilitando su transmisión
+
 :::
 
 
-:::: {.r-stack}
-::: {.fragment .fade-in-then-out }
+::::: {.r-stack}
+
+:::: {.fragment .fade-in-then-out }
+
 Uso:
 
-  <p align="center">
-  
-::::{.columns}
+:::{layout-ncol=3}
 
-:::{.column style='flex: 0.3' } 
+ 
   <img src="imagenes/get_data_curl.png" style="width:100%; margin-right:20px;"  />
-:::
 
-:::{.column style='flex: 0.3' } 
+
+
   <img src="imagenes/get_data_python.png"style="width:100%; margin-right:20px;" />
-:::
 
-:::{.column style='flex: 0.3' } 
+
+ 
   <img src="imagenes/get_data_r.png"style="width:100%; margin-right:20px;" />
-:::
 
+
+
+:::
+  
 ::::
-</p>
-:::
+   
+::: {.fragment .fade-in-then-out}
 
-::: {.fragment .fade-in-then-out }
 Resultado:
 
 <img src="imagenes/output_get_data.png" width="65%" />
+   
 
-:::    
+:::
 
-::::
+
+
+
+:::::
+
+
+
 ## La API inedata
 
 
