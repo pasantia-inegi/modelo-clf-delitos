@@ -283,6 +283,7 @@ superusuarios que quieran crear un usuario nuevo con o sin privilegios de superu
 
 5. `/register`: permite crear usuarios nuevos a un superusuario autentificado. Los usuarios creados podrán tener privilegios
 de superusuario si quien los crea así lo desea.
+  - Si el usuario ya existía se reemplazará su contraseña.
 
 
 ## Uso de la API en el browser
