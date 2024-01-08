@@ -353,7 +353,7 @@
 <li>[INSERTE JAVI]</li>
 <li>¿Qué es una API?</li>
 <li>API modelo delitos</li>
-<li>Uso de API en el browser</li>
+<li>Uso de la API en el browser</li>
 <li>Uso programático de la API</li>
 </ol>
 </section>
@@ -402,7 +402,7 @@
 <h2>Uso y motivación</h2>
 <div class="medium-par">
 <ul>
-<li class="fragment"><p>Esta API permite abstraer la clasificación de delitos de la programación, facilitando el acceso a cualquier persona usuaria que pueda seguir el manual de uso.</p></li>
+<li class="fragment"><p>Esta API permite abstraer la clasificación de delitos de la programación, facilitando el acceso a cualquier persona usuaria que siga el manual de uso.</p></li>
 <li class="fragment"><p>La API tiene un objetivo principal y dos secundarios:</p>
 <ul>
 <li class="fragment">Permitir, de manera sencilla, la predicción de categorías de delito, en base a los modelos <em>Deep Learning</em> que fueron desarrollados.</li>
@@ -415,116 +415,51 @@
 <section id="la-api" class="slide level2">
 <h2>La API</h2>
 <div class="medium-par">
+<p>La API está compuesta por 3 <em>endpoints</em> principales y 2 <em>endpoints</em> asociados a la autentificación - Un <em>endpoint</em> es una ruta dentro de la API que tiene asignada una tarea específica</p>
+<ol type="1">
+<li class="fragment"><p><code>/predecir</code>: Se ingresa lista con glosas de delitos a predecir y un parámetro <code>tipo_modelo</code> que puede tomar valores <code>modelo_15_clases</code> o <code>modelo_16_clasees</code> y devuelve un <code>.json</code> con dos llaves por cada glosa: <code>probabilidades</code> y <code>predicciones</code>.</p>
 <ul>
-<li class="fragment">La API está compuesta por 3 <em>endpoints</em> principales y 2 <em>endpoints</em> asociados a la autentificación
-<ul>
-<li class="fragment">Un <em>endpoint</em> es una ruta dentro de la API que tiene asignada una tarea específica</li>
-</ul></li>
-<li class="fragment">Estos son:
-<ul>
-<li class="fragment"><code>/predecir</code>: Se ingresa lista con glosas de delitos a predecir y parámetro <code>tipo_modelo</code> que puede tomar valores <code>modelo_15_clases</code> o <code>modelo_16_clasees</code> y devuelve dos objetos por cada glosa: el primero contiene las probabilidades calculadas asociadas a cada delito, junto con el nombre del delito. El segundo, contiene el nombre del delito que tuvo la probabilidad más alta calculada por el modelo seleccionado. Esta se devuelve en formato <code>.json</code>
+<li class="fragment">La primera contiene las probabilidades calculadas asociadas a cada delito, junto con el nombre del delito.</li>
+<li class="fragment">La segunda contiene el nombre del delito que tuvo la probabilidad más alta calculada por el modelo seleccionado. Esta se devuelve en formato <code>.json</code>
 <ul>
 <li class="fragment"><code>.json</code> es una forma estándar y flexible de dar formato y estructura a los datos, facilitando su transmisión</li>
 </ul></li>
 </ul></li>
-</ul>
+</ol>
 </div>
-<div class="r-stack">
-<div class="fragment fade-in-then-out">
-<p>Uso:</p>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img src="imagenes/get_data_curl.png" style="width:100%; margin-right:20px;"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img src="imagenes/get_data_python.png" style="width:100%; margin-right:20px;"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<p><img src="imagenes/get_data_r.png" style="width:100%; margin-right:20px;"></p>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment fade-in-then-out">
+</section>
+<section id="la-api-1" class="slide level2">
+<h2>La API</h2>
 <p>Resultado:</p>
-<p><img src="imagenes/output_get_data.png" width="65%"></p>
-</div>
-</div>
+<p><img src="imagenes/output_get_data.png" width="35%"></p>
 </section>
-<section id="la-api-inedata" class="slide level2">
-<h2>La API inedata</h2>
-<div class="medium-par">
+<section id="la-api-2" class="slide level2 medium-par">
+<h2>La API</h2>
+<ol start="2" type="1">
+<li><p><code>/get_training_data</code>: retorna los datos de entrenamiento del modelo, en un <code>.json</code> con 4 llaves: <code>X_test</code>, <code>X_train</code>, <code>y_test</code>, <code>y_train</code>.</p>
 <ul>
-<li><p>La API está compuesta por 4 <em>endpoints</em> principales</p>
-<ul>
-<li>Un <em>endpoint</em> es una ruta dentro de la API que tiene asignada una tarea específica</li>
+<li><p>OJO: el uso de este endpoint requiere <span class="red">autentificación</span>. Veremos en la demostración cómo autentificar.</p></li>
+<li><p>No mostraremos el resultado, ya que son datos confidenciales.</p></li>
 </ul></li>
-<li><p>Estos son:</p>
-<ul>
-<li><code>/colnames</code>: se le entrega un dataset y una versión y a cambio entrega las columnas de esa tabla.</li>
-</ul></li>
-</ul>
-</div>
-<div class="fragment">
-<p>Uso:</p>
-<pre><code> http://127.0.0.1:8000/colnames?dataset=epf_gastos&amp;version=viii</code></pre>
-</div>
-<div class="fragment">
+<li><p><code>/get_model_metrics</code>: Entrega <em>precision, recall, f1-score</em> y <em>support</em> para cada una de las clases, para un modelo específico. El parámetro <code>tipo_modelo</code> vuelve a definir qué modelo se selecciona.</p></li>
+</ol>
+</section>
+<section id="la-api-3" class="slide level2 medium-par">
+<h2>La API</h2>
 <p>Resultado:</p>
-<pre><code> {"data":["index","ï»¿ZONA","FOLIO_V","FOLIO","FE","VARSTRAT","VARUNIT","CCIF","D","G","C","SC","P","GASTO","GLOSA"]}</code></pre>
-</div>
+<p><span class="small-par">{ “data”: “[{"Delito":"AMENAZA","precision":0.9485094851,"recall":0.9296148738,"f1-score":0.9389671362,"support":753.0},{"Delito":"CIBER_ACOSO","precision":0.9566787004,"recall":0.9330985915,"f1-score":0.944741533,"support":284.0},{"Delito":"CIBER_DESTRUC","precision":1.0,"recall":0.1428571429,"f1-score":0.25,"support":7.0},{"Delito":"CIBER_HACKEO","precision":0.8770226537,"recall":0.9575971731,"f1-score":0.9155405405,"support":283.0},{"Delito":"ESTAFA","precision":0.9483394834,"recall":0.9345454545,"f1-score":0.9413919414,"support":825.0},{"Delito":"FRAUDE","precision":0.9399141631,"recall":0.9591240876,"f1-score":0.9494219653,"support":685.0},{"Delito":"HURTO","precision":0.8653169014,"recall":0.8615249781,"f1-score":0.8634167765,"support":1141.0},{"Delito":"LESIONES","precision":0.896373057,"recall":0.8737373737,"f1-score":0.8849104859,"support":198.0},{"Delito":"ROBO_DESDE_VEHIC","precision":0.9134355275,"recall":0.946728972,"f1-score":0.9297843047,"support":1070.0},{"Delito":"ROBO_SORPRESA","precision":0.8620689655,"recall":0.8095238095,"f1-score":0.8349705305,"support":525.0},{"Delito":"ROBO_VEHIC","precision":0.8888888889,"recall":0.6746987952,"f1-score":0.7671232877,"support":83.0},{"Delito":"ROBO_VIOLENCIA","precision":0.9165275459,"recall":0.9089403974,"f1-score":0.9127182045,"support":604.0},{"Delito":"ROBO_VIVIENDA","precision":0.857712766,"recall":0.9201141227,"f1-score":0.887818307,"support":701.0},{"Delito":"VANDAL_VEHIC","precision":0.9362831858,"recall":0.8950930626,"f1-score":0.9152249135,"support":591.0},{"Delito":"VANDAL_VIV","precision":0.9409836066,"recall":0.9456342669,"f1-score":0.9433032046,"support":607.0},{"Delito":"accuracy","precision":0.910853177,"recall":0.910853177,"f1-score":0.910853177,"support":0.910853177},{"Delito":"macro avg","precision":0.9165369953,"recall":0.8461888734,"f1-score":0.8586222087,"support":8357.0},{"Delito":"weighted avg","precision":0.9112422194,"recall":0.910853177,"f1-score":0.9103261222,"support":8357.0}]” }</span></p>
 </section>
-<section id="la-api-inedata-1" class="slide level2">
-<h2>La API inedata</h2>
-<div class="medium-par">
-<ul>
-<li><p>La API está compuesta por 4 <em>endpoints</em> principales</p>
-<ul>
-<li>Un <em>endpoint</em> es una ruta dentro de la API que tiene asignada una tarea específica</li>
-</ul></li>
-<li><p>Estos son:</p>
-<ul>
-<li><code>/info</code>: entrega información descriptiva de las tablas disponibles. Opcionalmente se puede ingresar una encuesta para filtrar, obteniendo la información de las tablas asociadas a esa encuesta</li>
-</ul></li>
-</ul>
-</div>
-<div class="fragment">
-<p>Uso:</p>
-<pre><code> http://127.0.0.1:8000/info?dataset_filter=epf_gastos</code></pre>
-</div>
-<div class="fragment">
-<p>Resultado:</p>
-<pre><code> "[{\"survey\":\"epf_gastos\",\"version\":\"vii\",\"n_row\":641938,\"n_col\":12,\"file_size\":32763938},{\"survey\":\"epf_gastos\",\"version\":\"viii\",\"n_row\":1064239,\"n_col\":15,\"file_size\":85938002}]"</code></pre>
-</div>
+<section id="la-api-4" class="slide level2 medium-par">
+<h2>La API</h2>
+<ol start="4" type="1">
+<li><p><code>/login</code>: permite a una persona usuaria autentificarse en la API. Actualmente, este <em>endpoint</em> es solo útil para superusuarios que quieran crear un usuario nuevo con o sin privilegios de superusuario.</p></li>
+<li><p><code>/register</code>: permite crear usuarios nuevos a un superusuario autentificado. Los usuarios creados podrán tener privilegios de superusuario si quien los crea así lo desea.</p></li>
+</ol>
 </section>
-<section id="la-api-inedata-2" class="slide level2">
-<h2>La API inedata</h2>
-<div class="medium-par">
-<ul>
-<li><p>La API está compuesta por 4 <em>endpoints</em> principales</p>
-<ul>
-<li>Un <em>endpoint</em> es una ruta dentro de la API que tiene asignada una tarea específica</li>
-</ul></li>
-<li><p>Estos son:</p>
-<ul>
-<li><code>/uploadfile</code>: permite subir tablas nuevas, que podrán ser consultadas en un futuro.
-<ul>
-<li>Solo para administradores de la API.</li>
-<li>Es posible que este <em>endpoint</em> cambie considerablemente.</li>
-</ul></li>
-</ul></li>
-</ul>
-</div>
-<div class="fragment">
-<p>UI al ingresar al endpoint:</p>
-<p><img src="imagenes/uploadfile.png" style="width:60%; margin-right:20px;"></p>
-</div>
-</section>
-<section id="api-en-acción" class="slide level2">
-<h2>API en acción</h2>
+<section id="uso-de-la-api-en-el-browser" class="slide level2">
+<h2>Uso de la API en el browser</h2>
 <p>Al entrar a la URL, se nos envía directamente a la documentación, que, junto con explicar cada <em>endpoint</em> nos permite probarlos.</p>
-<p>Probemos la api!</p>
+<p><a href="http://10.90.2.47:3123/">Probemos la api!</a></p>
 </section>
 <section id="uso-programático-de-la-api-parte-ii-javi" class="slide level2">
 <h2>Uso programático de la API (Parte II Javi)</h2>
