@@ -1,9 +1,7 @@
 ---
-# title: "Capacitación en R y herramientas de productividad"
-# author: "Abril 2021"
+# title: "Modelo y API predicción de delitos"
+# author: "Enero 2024"
 format:
-  # html:
-  #   code-fold: true
   revealjs:
     auto-stretch: false
     margin: 0
@@ -42,30 +40,135 @@ engine: knitr
 
 
 [**Proyecto Ciencia de Datos**]{.big-par .center-justified}
-
-[**Proyecto: Modelo y API predicción de delitos**]{.big-par .center-justified}
+[**Modelo y API predicción de delitos**]{.big-par .center-justified}
+[**Encuesta Nacional Urbana de Seguridad Ciudadana**]{.medium-par .center-justified}
 
 [**Enero 2024**]{.big-par .center-justified}
 
 
-## Temario
+## Contenidos
 
-1. [INSERTE JAVI]
+1. Descripción del modelo 🔎
+    - [Contexto]{.big-par}
+    - [Métricas]{.big-par} 
 2. ¿Qué es una API?
 3. API modelo delitos
 4. Uso de API en el browser
-5. Uso programático de la API
-
-
-## [PARTE I JAVI]
-
+5. Uso programático de la API 💻✍️
+    - [¿Cómo realizamos predicciones?]{.big-par}
+    - [¿Cómo extraemos los datos de entrenamiento y testeo?]{.big-par}
 
 
 
+## Descripción del modelo | Contexto (1/2)
+
+::: {.incremental}
+
+- Para la creación del modelo de clasificación, se utilizaron los 15 tipos de delitos disponibles con una separación train-test del 80%-20%.
+
+- Se ajustó un modelo con redes neuronales usando una capa de embeddings y LSTM.
+
+- Dada la existencia de relatos cortos no informativos tales como:
+    
+    [*sin relato, julio 2019,  error al contestar, ocurrido en octubre, <br>
+     denunció a fiscalia en junio de este año, no paso a mayores, etc*]{style="color:gray;" .center}
+  
+  se decidió crear un **segundo modelo experimental con 16 clases**; 15 delitos disponibles más la clase  [*SIN_CLASIFICACION*]{style="color:blue;"}.
+
+:::
+
+## Descripción del modelo | Contexto (2/2)
+
+
+::: {.pull-left  .medium-par}
+
+- **Modelo de 15 clases**: 33462 observaciones de entrenamiento y 8357 observaciones de testeo.
+
+- **Modelo de 16 clases**: 33637 observaciones de entrenamiento y 8401 observaciones de testeo.
+
+:::
+
+. . . 
+
+::: { .medium-par .pull-right}
+
+```{r metricas, echo = FALSE, warning=FALSE, message=FALSE}
+
+library(readr)
+library(dplyr)
+library(kableExtra)
+library(readxl)
+
+metricas_test_mod15clas <- read_excel("data/metricas_modelo_15clases_V4.xlsx")
+metricas_test_mod16clas <- read_excel("data/metricas_modelo_16clases_V3.xlsx")
+load('data/tabla_n_del.RData')
+
+tabla %>% 
+  kbl()
+
+```
+
+:::
+
+
+## Descripción del modelo | Métricas
+
+::: { .medium-par .pull-left}
+
+Métricas modelo con **15 clases** en set de testeo:
+
+- Accuracy = `r round(metricas_test_mod15clas$support[16], digits = 3)`
+
+::: { .small-par}
+
+```{r m_mod15, echo = FALSE}
+
+metricas_test_mod15clas %>% 
+  mutate( precision= round(precision, digits = 3),
+          recall= round(recall, digits = 3),
+          `f1-score` = round(`f1-score`, digits = 3), 
+          obs= round(support)) %>% 
+  head(15) %>%
+  kbl()
+
+
+```
+
+:::
+
+$$ $$
+
+:::
+
+. . .
+
+::: {.medium-par .pull-right}
+
+Métricas modelo con **16 clases** en set de testeo: 
+
+- Accuracy = `r round(metricas_test_mod16clas$support[17], digits = 3)`
+
+::: { .small-par}
+
+```{r m_mod16, echo =FALSE}
+
+metricas_test_mod16clas %>% 
+  mutate( precision= round(precision, digits = 3),
+          recall= round(recall, digits = 3),
+          `f1-score` = round(`f1-score`, digits = 3), 
+          obs= round(support)) %>% 
+  head(16) %>% 
+  kbl()
+```
+
+:::
+
+$$ $$
+
+:::
 
 
 ## ¿Qué es una API?
-
 
 
 ::: {.incremental}
@@ -270,10 +373,102 @@ Probemos la api!
 
 
 
-## Uso programático de la API (Parte II Javi)
+## [Uso programático de la API | ¿Cómo realizamos predicciones?]{.big-par}
+
+Conexión desde R:
+
+```{r eval = FALSE, echo=TRUE}
+
+# cargar paquetes 
+library(httr)
+library(jsonlite)
+
+# ingresar la url API
+url <- 'http://10.90.2.47:3123/docs'
+
+# indicar tipo de modelo: 'modelo_15_clases' o 'modelo_16_clases':
+query <- list(tipo_modelo = "modelo_15_clases")     
+
+# indicar relatos a clasificar:
+body <- list("Iba hablando por telefono y me arrancaron el celular de las manos", 
+             'ingresaron a mi casa rompuedo la chapa, me amenazaron y robaron joyas')
+
+# realizar el requerimiento:
+respuesta <- POST(url,                              # url API
+                  path = '/predecir',               # ruta, NO MODIFICAR
+                  body = body,                      # relatos a clasificar
+                  query = query,                    # modelo 
+                  encode = "json")
+
+# desenvolvemos las predicciones anidadas JSON de la lista a R
+prediccion <- fromJSON(content(respuesta, 'text', encoding = 'UTF-8'))
+
+# revisamos la variable
+str(prediccion)
+
+# transformando de caracter a numerico
+prediccion$probabilidades <- apply(prediccion$probabilidades, 2, as.numeric) %>%
+  as.data.frame()
+
+# extraemos la probabilidad maxima alcanzada:
+
+prediccion$probabilidades <- prediccion$probabilidades %>% 
+  mutate(prob_max = apply(prediccion$probabilidades, 1, max, na.rm=TRUE))
+
+```
 
 
 
+## [Uso programático de la API | ¿Cómo extraemos los datos train-test?]{.big-par}
+
+Para obtener los datos de entrenamiento y testeo, es necesario que los usuarios tengan una cuenta con acceso al endopoint, pues se utiliza un sistema de autenticación mediante *tokens*, el cual posee una duración limitada.
+
+. . .
+
+Conexión desde R:
+
+:::{.medium-par}
+- Obteniendo token$^*$:
+
+```{r eval = FALSE, echo=TRUE}
+
+# Ingresando información del usuario con variables de ambiente:
+usuario <- list(username =  Sys.getenv("USERNAME"), 
+                password = Sys.getenv("PASSWORD"))
+                
+# Realizar requerimiento para obtener el token de acceso del usuario:
+resp_token <- POST(url = 'http://10.90.2.47:3123/token', 
+                   body = usuario,
+                   authenticate(usuario$username, usuario$password))     
+
+# Extraer respuesta y token:
+token <- content(resp_token)
+token <- paste(token$token_type, token$access_token)
+
+```
+
+- Obteniendo datos de entrenamiento y testeo:
+
+```{r eval = FALSE, echo=TRUE}
+
+respuesta <- GET(url,                         
+                 path = '/get_training_data', 
+                 query = query,                          # modelo_15_clases / modelo_16_clases
+                 add_headers('Authorization' = token))              
+
+
+## desenvolvemos los datos tipos JSON a R
+data <- fromJSON(content(respuesta, 'text', encoding = "UTF-8"))
+
+## volvemos a transformar los datos anidados JSON de la lista a R
+y_test <- fromJSON(data$y_test)
+X_test <- fromJSON(data$X_test)
+
+```
+
+:::
+
+$^*$ [Para editar nuestras variables de ambiente del archivo *.Renviron*, podemos hacerlo usando la función `usethis::edit_r_environ()`, la cual nos abrirá un archivo *.Renviron*. Una vez realizadas las modificaciones, reiniciamos la sesión de R para observar los cambios.]{.small-par}
 
 ## ¿Conclusiones?
 
@@ -297,10 +492,10 @@ Probemos la api!
 <img src="imagenes/logo_portada2.png" width="20%"/>  
 
 
-[**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 
-[**Proyecto: Modelo y API predicción de delitos**]{.big-par .center-justified}
+[**Proyecto Ciencia de Datos**]{.big-par .center-justified}
+[**Modelo y API predicción de delitos**]{.big-par .center-justified}
+[**Encuesta Nacional Urbana de Seguridad Ciudadana**]{.medium-par .center-justified}
 
 [**Enero 2024**]{.big-par .center-justified}
-
 
