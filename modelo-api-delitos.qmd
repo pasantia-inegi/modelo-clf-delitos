@@ -80,18 +80,18 @@ engine: knitr
 ## Descripción del modelo | Contexto (2/2)
 
 
-::: {.pull-left  .medium-par}
+:::: {layout-ncol=2}
 
+::: fragment
 - **Modelo de 15 clases**: 33462 observaciones de entrenamiento y 8357 observaciones de testeo.
 
 - **Modelo de 16 clases**: 33637 observaciones de entrenamiento y 8401 observaciones de testeo.
 
 :::
 
-. . . 
 
-::: { .medium-par .pull-right}
-
+::: fragment
+::: {.medium-par}
 ```{r metricas, echo = FALSE, warning=FALSE, message=FALSE}
 
 library(readr)
@@ -107,20 +107,20 @@ tabla %>%
   kbl()
 
 ```
+:::
 
 :::
 
+::::
 
-## Descripción del modelo | Métricas
-
-::: { .medium-par .pull-left}
+## Descripción del modelo | Métricas (1/2)
 
 Métricas modelo con **15 clases** en set de testeo:
 
-- Accuracy = `r round(metricas_test_mod15clas$support[16], digits = 3)`
 
-::: { .small-par}
+**Accuracy** = `r round(metricas_test_mod15clas$support[16], digits = 3)`
 
+::: {.medium-par}
 ```{r m_mod15, echo = FALSE}
 
 metricas_test_mod15clas %>% 
@@ -138,17 +138,15 @@ metricas_test_mod15clas %>%
 
 $$ $$
 
-:::
 
-. . .
 
-::: {.medium-par .pull-right}
+## Descripción del modelo | Métricas (2/2)
 
 Métricas modelo con **16 clases** en set de testeo: 
 
-- Accuracy = `r round(metricas_test_mod16clas$support[17], digits = 3)`
+**Accuracy** = `r round(metricas_test_mod16clas$support[17], digits = 3)`
 
-::: { .small-par}
+::: {.medium-par}
 
 ```{r m_mod16, echo =FALSE}
 
@@ -164,8 +162,6 @@ metricas_test_mod16clas %>%
 :::
 
 $$ $$
-
-:::
 
 
 ## ¿Qué es una API?
@@ -398,7 +394,7 @@ X_test <- fromJSON(data$X_test)
 
 :::
 
-$^*$ [Para editar nuestras variables de ambiente del archivo *.Renviron*, podemos hacerlo usando la función `usethis::edit_r_environ()`, la cual nos abrirá un archivo *.Renviron*. Una vez realizadas las modificaciones, reiniciamos la sesión de R para observar los cambios.]{.small-par}
+$^*$ [Para editar nuestras variables de ambiente del archivo *.Renviron*, podemos hacerlo usando la función `usethis::edit_r_environ()`, la cual nos abrirá un archivo *.Renviron*. Una vez realizadas las modificaciones, reiniciamos la sesión de R para observar los cambios.]{.medium-par}
 
 
 ## En resumen
