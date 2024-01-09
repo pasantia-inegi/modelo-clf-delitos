@@ -432,11 +432,21 @@
 </ul></li>
 </ol>
 </section>
-<section id="descripción-del-modelo-contexto-12" class="slide level2">
-<h2>Descripción del modelo | Contexto (1/2)</h2>
+<section id="descripción-del-modelo-contexto-13" class="slide level2">
+<h2>Descripción del modelo | Contexto (1/3)</h2>
 <div>
 <ul>
-<li class="fragment"><p>Para la creación del modelo de clasificación, se utilizaron los 15 tipos de delitos disponibles con una separación train-test del 80%-20%.</p></li>
+<li class="fragment"><p>En cada versión de la ENUSC, en promedio, se debe clasificar y validar al rededor de <strong>10500</strong> relatos de delitos.</p></li>
+<li class="fragment"><p>Este proceso de revisión actualmente se realiza “manualmente”, en donde los integrantes de ENUSC clasifican aproximadamente <strong>500</strong> relatos diarios.</p></li>
+<li class="fragment"><p>Dada esta problemática, se creó un modelo de clasificación de relatos que asigna un delito, con cierta probabilidad, a cada relato entregado. Lo cual permite ayudar al equipo ENUSC en está revisión.</p></li>
+</ul>
+</div>
+</section>
+<section id="descripción-del-modelo-contexto-23" class="slide level2">
+<h2>Descripción del modelo | Contexto (2/3)</h2>
+<div>
+<ul>
+<li class="fragment"><p>Para este modelo de clasificación, se utilizaron los 15 tipos de delitos disponibles con una separación train-test del 80%-20%.</p></li>
 <li class="fragment"><p>Se ajustó un modelo con redes neuronales usando una capa de embeddings y LSTM.</p></li>
 <li class="fragment"><p>Dada la existencia de relatos cortos no informativos tales como:</p>
 <p><span class="center" style="color:gray;"><em>sin relato, julio 2019, error al contestar, ocurrido en octubre, <br> denunció a fiscalia en junio de este año, no paso a mayores, etc</em></span></p>
@@ -444,8 +454,8 @@
 </ul>
 </div>
 </section>
-<section id="descripción-del-modelo-contexto-22" class="slide level2">
-<h2>Descripción del modelo | Contexto (2/2)</h2>
+<section id="descripción-del-modelo-contexto-33" class="slide level2">
+<h2>Descripción del modelo | Contexto (3/3)</h2>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="fragment quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -940,6 +950,9 @@
 <li><p><code>/login</code>: permite a una persona usuaria autentificarse en la API. Actualmente, este <em>endpoint</em> es solo útil para superusuarios que quieran crear un usuario nuevo con o sin privilegios de superusuario.</p></li>
 <li><p><code>/register</code>: permite crear usuarios nuevos a un superusuario autentificado. Los usuarios creados podrán tener privilegios de superusuario si quien los crea así lo desea.</p></li>
 </ol>
+<ul>
+<li>Si el usuario ya existía se reemplazará su contraseña.</li>
+</ul>
 </section>
 <section id="uso-de-la-api-en-el-browser" class="slide level2">
 <h2>Uso de la API en el browser</h2>
@@ -1028,14 +1041,16 @@
 <span id="cb3-12"><a href="#cb3-12"></a>X_test <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(data<span class="sc">$</span>X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p><span class="math inline">\(^*\)</span> <span class="medium-par">Para editar nuestras variables de ambiente del archivo <em>.Renviron</em>, podemos hacerlo usando la función <code>usethis::edit_r_environ()</code>, la cual nos abrirá un archivo <em>.Renviron</em>. Una vez realizadas las modificaciones, reiniciamos la sesión de R para observar los cambios.</span></p>
+<p><br></p>
+<p><span class="math inline">\(^*\)</span> <span class="medium-par">Para editar nuestras variables de ambiente del archivo <em>.Renviron</em> en nuestro proyecto, podemos usar la función <code>usethis::edit_r_environ('project')</code>, la cual nos abrirá un archivo <em>.Renviron</em>. Una vez realizadas las modificaciones, reiniciamos la sesión de R para observar los cambios.</span></p>
+<p><br> <br></p>
 </div>
 </section>
 <section id="en-resumen" class="slide level2">
 <h2>En resumen</h2>
-<div>
+<div class="big-par">
 <ul>
-<li class="fragment">API permite predecir delitos de manera sencilla
+<li class="fragment">La API permite predecir delitos de manera sencilla
 <ul>
 <li class="fragment">De manera “didáctica” en la documentación y de manera programática</li>
 </ul></li>
