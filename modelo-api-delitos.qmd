@@ -60,13 +60,25 @@ engine: knitr
 
 
 
-## Descripción del modelo | Contexto (1/2)
+## Descripción del modelo | Contexto (1/3)
 
 ::: {.incremental}
 
-- Para la creación del modelo de clasificación, se utilizaron los 15 tipos de delitos disponibles con una separación train-test del 80%-20%.
+- En cada versión de la ENUSC, en promedio, se debe clasificar y validar al rededor de **10500** relatos de delitos. 
 
-- Se ajustó un modelo con redes neuronales usando una capa de embeddings y LSTM.
+- Este proceso de revisión actualmente se realiza "manualmente", en donde los integrantes de ENUSC clasifican aproximadamente **500** relatos diarios. 
+
+- Dada esta problemática, se creó un modelo de clasificación de relatos que asigna un delito, con cierta probabilidad, a cada relato entregado. Lo cual permite ayudar al equipo ENUSC en está revisión. 
+
+
+:::
+
+## Descripción del modelo | Contexto (2/3)
+
+::: {.incremental}
+- Para este modelo de clasificación, se utilizaron los 15 tipos de delitos disponibles con una separación train-test del 80%-20%.
+
+- Se ajustó un modelo con redes neuronales usando una capa de embeddings y LSTM. Lo que nos permite captar la semántica de los relatos y procesar la característica base secuencial que posee nuestro lenguaje.
 
 - Dada la existencia de relatos cortos no informativos tales como:
     
@@ -77,21 +89,21 @@ engine: knitr
 
 :::
 
-## Descripción del modelo | Contexto (2/2)
+## Descripción del modelo | Contexto (3/3)
 
 
-::: {.pull-left  .medium-par}
+:::: {layout-ncol=2}
 
+::: fragment
 - **Modelo de 15 clases**: 33462 observaciones de entrenamiento y 8357 observaciones de testeo.
 
 - **Modelo de 16 clases**: 33637 observaciones de entrenamiento y 8401 observaciones de testeo.
 
 :::
 
-. . . 
 
-::: { .medium-par .pull-right}
-
+::: fragment
+::: {.medium-par}
 ```{r metricas, echo = FALSE, warning=FALSE, message=FALSE}
 
 library(readr)
@@ -107,20 +119,20 @@ tabla %>%
   kbl()
 
 ```
+:::
 
 :::
 
+::::
 
-## Descripción del modelo | Métricas
-
-::: { .medium-par .pull-left}
+## Descripción del modelo | Métricas (1/2)
 
 Métricas modelo con **15 clases** en set de testeo:
 
-- Accuracy = `r round(metricas_test_mod15clas$support[16], digits = 3)`
 
-::: { .small-par}
+**Accuracy** = `r round(metricas_test_mod15clas$support[16], digits = 3)`
 
+::: {.medium-par}
 ```{r m_mod15, echo = FALSE}
 
 metricas_test_mod15clas %>% 
@@ -138,17 +150,15 @@ metricas_test_mod15clas %>%
 
 $$ $$
 
-:::
 
-. . .
 
-::: {.medium-par .pull-right}
+## Descripción del modelo | Métricas (2/2)
 
 Métricas modelo con **16 clases** en set de testeo: 
 
-- Accuracy = `r round(metricas_test_mod16clas$support[17], digits = 3)`
+**Accuracy** = `r round(metricas_test_mod16clas$support[17], digits = 3)`
 
-::: { .small-par}
+::: {.medium-par}
 
 ```{r m_mod16, echo =FALSE}
 
@@ -164,8 +174,6 @@ metricas_test_mod16clas %>%
 :::
 
 $$ $$
-
-:::
 
 
 ## ¿Qué es una API?
@@ -399,14 +407,18 @@ X_test <- fromJSON(data$X_test)
 
 :::
 
-$^*$ [Para editar nuestras variables de ambiente del archivo *.Renviron*, podemos hacerlo usando la función `usethis::edit_r_environ()`, la cual nos abrirá un archivo *.Renviron*. Una vez realizadas las modificaciones, reiniciamos la sesión de R para observar los cambios.]{.small-par}
+<br>
 
+$^*$ [Para editar nuestras variables de ambiente del archivo *.Renviron* en nuestro proyecto, podemos usar la función `usethis::edit_r_environ('project')`, la cual nos abrirá un archivo *.Renviron*. Una vez realizadas las modificaciones, reiniciamos la sesión de R para observar los cambios.]{.medium-par}
+
+<br>
+<br>
 
 ## En resumen
 
-:::{.incremental }
+:::{.incremental .big-par}
 
-- API permite predecir delitos de manera sencilla
+- La API permite predecir delitos de manera sencilla
     - De manera "didáctica" en la documentación y de manera programática
 - Cuenta con autentificación para resguardar datos de carácter privado
 - Además, permite acceder a métricas del modelo y los datos de entrenamiento de este 
