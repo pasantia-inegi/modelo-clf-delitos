@@ -8,7 +8,7 @@
 <link href="modelo-api-delitos_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="modelo-api-delitos_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="modelo-api-delitos_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.353">
+  <meta name="generator" content="quarto-1.3.433">
 
   <title>modelo-api-delitos</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -447,7 +447,7 @@
 <div>
 <ul>
 <li class="fragment"><p>Para este modelo de clasificación, se utilizaron los 15 tipos de delitos disponibles con una separación train-test del 80%-20%.</p></li>
-<li class="fragment"><p>Se ajustó un modelo con redes neuronales usando una capa de embeddings y LSTM.</p></li>
+<li class="fragment"><p>Se ajustó un modelo con redes neuronales usando una capa de embeddings y LSTM. Lo que nos permite captar la semántica de los relatos y procesar la característica base secuencial que posee nuestro lenguaje.</p></li>
 <li class="fragment"><p>Dada la existencia de relatos cortos no informativos tales como:</p>
 <p><span class="center" style="color:gray;"><em>sin relato, julio 2019, error al contestar, ocurrido en octubre, <br> denunció a fiscalia en junio de este año, no paso a mayores, etc</em></span></p>
 <p>se decidió crear un <strong>segundo modelo experimental con 16 clases</strong>; 15 delitos disponibles más la clase <span style="color:blue;"><em>SIN_CLASIFICACION</em></span>.</p></li>

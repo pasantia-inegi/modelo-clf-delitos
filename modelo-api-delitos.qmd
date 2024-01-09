@@ -252,7 +252,7 @@ La API está compuesta por 3 _endpoints_ principales y  2 _endpoints_ asociados 
   
 
 
-1. `/predecir`: Se ingresa lista con glosas de delitos a predecir y un parámetro `tipo_modelo` que puede tomar valores `modelo_15_clases` o `modelo_16_clasees` y devuelve un `.json` con dos llaves por cada glosa: `probabilidades` y `predicciones`.
+1. `/predecir`: Se ingresa lista con glosas de delitos a predecir y un parámetro `tipo_modelo` que puede tomar valores `modelo_15_clases` o `modelo_16_clases` y devuelve un `.json` con dos llaves por cada glosa: `probabilidades` y `predicciones`.
 
     - La primera contiene las probabilidades calculadas asociadas a cada delito, junto con el nombre del delito.
     - La segunda contiene el nombre del delito que tuvo la probabilidad más alta calculada por el modelo seleccionado. Esta se devuelve en formato `.json`
@@ -300,7 +300,7 @@ de superusuario si quien los crea así lo desea.
 
 ## Uso de la API en el browser
 
-Al entrar a la URL, se nos envía directamente a la documentación, que, junto con explicar cada _endpoint_
+Al entrar a la URL, se nos envía directamente a la documentación, que, junto con explicar cada _endpoint_,
 nos permite probarlos.
 
 [Probemos la api!](http://10.90.2.47:3123/)
@@ -360,7 +360,7 @@ prediccion$probabilidades <- prediccion$probabilidades %>%
 
 ## [Uso programático de la API | ¿Cómo extraemos los datos train-test?]{.big-par}
 
-Para obtener los datos de entrenamiento y testeo, es necesario que los usuarios tengan una cuenta con acceso al endopoint, pues se utiliza un sistema de autenticación mediante *tokens*, el cual posee una duración limitada.
+Para obtener los datos de entrenamiento y testeo, es necesario que los usuarios tengan una cuenta con acceso al endpoint, pues se utiliza un sistema de autenticación mediante *tokens*, el cual posee una duración limitada.
 
 . . .
 
