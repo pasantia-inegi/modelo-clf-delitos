@@ -68,7 +68,7 @@ engine: knitr
 
 - Este proceso de revisión actualmente se realiza "manualmente", en donde los integrantes de ENUSC clasifican aproximadamente **500** relatos diarios. 
 
-- Dada esta problemática, se creó un modelo de clasificación de relatos que asigna un delito, con cierta probabilidad, a cada relato entregado. Lo cual permite ayudar al equipo ENUSC en está revisión. 
+- Dada esta situación, se creó un modelo de clasificación que asigna un delito, con cierta probabilidad, a cada relato entregado. Lo cual permite ayudar al equipo ENUSC en está revisión. 
 
 
 :::
@@ -85,7 +85,7 @@ engine: knitr
     [*sin relato, julio 2019,  error al contestar, ocurrido en octubre, <br>
      denunció a fiscalia en junio de este año, no paso a mayores, etc*]{style="color:gray;" .center}
   
-  se decidió crear un **segundo modelo experimental con 16 clases**; 15 delitos disponibles más la clase  [*SIN_CLASIFICACION*]{style="color:blue;"}.
+  se decidió crear un **segundo modelo experimental con 16 clases**; 15 delitos disponibles más la clase  [*NO_CLASIFICABLE*]{style="color:blue;"}.
 
 :::
 
@@ -139,7 +139,7 @@ metricas_test_mod15clas %>%
   mutate( precision= round(precision, digits = 3),
           recall= round(recall, digits = 3),
           `f1-score` = round(`f1-score`, digits = 3), 
-          obs= round(support)) %>% 
+          support= round(support)) %>% 
   head(15) %>%
   kbl()
 
@@ -163,10 +163,10 @@ Métricas modelo con **16 clases** en set de testeo:
 ```{r m_mod16, echo =FALSE}
 
 metricas_test_mod16clas %>% 
-  mutate( precision= round(precision, digits = 3),
-          recall= round(recall, digits = 3),
+  mutate( precision = round(precision, digits = 3),
+          recall = round(recall, digits = 3),
           `f1-score` = round(`f1-score`, digits = 3), 
-          obs= round(support)) %>% 
+          support = round(support)) %>% 
   head(16) %>% 
   kbl()
 ```
