@@ -51,10 +51,9 @@ engine: knitr
 1. Descripción del modelo 🔎
     - [Contexto]{.big-par}
     - [Métricas]{.big-par} 
-2. ¿Qué es una API?
-3. API modelo delitos
-4. Uso de la API en el browser
-5. Uso programático de la API 💻✍️
+2. API modelo delitos
+3. Uso de la API en el browser
+4. Uso programático de la API 💻✍️
     - [¿Cómo realizamos predicciones?]{.big-par}
     - [¿Cómo extraemos los datos de entrenamiento y testeo?]{.big-par}
 
@@ -175,59 +174,37 @@ metricas_test_mod16clas %>%
 
 $$ $$
 
-
-## ¿Qué es una API?
-
-
-::: {.incremental}
-- Las APIs (_Application Programming Interface_) son piezas de código que permiten que dos aplicaciones o computadoras se comuniquen.
-
-- Se podría decir que la API es un intermediario que permite a que un programa le pida cosas específicas a otro programa, sin necesidad 
-de conocer en detalle cómo funciona este otro.
+# API modelo delitos 
 
 
-- En la práctica, nos permiten acceder desde un programa en nuestro computador -como Python o R- a los datos de algún servicio, al que de otra manera no tendríamos acceso o bien tendríamos que hacerlo pasando por la página web, lo que implica un proceso más costoso para el usuario y para el proveedor.
+## API modelo delitos | Estructura
 
-- Ejemplos clásicos de APIs son: API de twitter para recolectar tuits, iniciar sesión con Google, API de la CMF para valor UF, monedas extranjeras, IPC, etc.
-:::
+![](imagenes/diagrama.png)
 
-## ¿Qué es una API? {.medium-par}
+## API modelo delitos | Ventajas FastAPI {.medium-par}
 
-:::: {layout-ncol=2}
+::: incremental
 
-::: fragment
-La analogía del restaurant es práctica para entender la lógica de las API:
-
-- El usuario/a sería el cliente
-- La API sería la mesera
-- La información que nos puede disponibilizar la API es el menú
-- Los servidores con sus bases de datos serían la cocina
+- Es uno de los frameworks más rápidos que existen, a la altura de Go y NodeJS.
+- Es fácil de usar, aumentando la velocidad de desarrollo.
+- Aprovecha el desarrollo de otras librerías y estándares como Starlette, Flask, 
+OpenAPI y Pydantic, lo que aporta con robustez en los sistemas.
+- Aprovecha Python moderno, utilizando type hints, funciones asíncronas, etc.
+- Genera automáticamente documentación interactiva con SwaggerUI.
 
 :::
 
+## API modelo delitos | Ventajas FastAPI {.medium-par}
 
-::: fragment
-Por lo tanto:
+::: {.r-stack}
 
-- El usuario le pide a la API una información específica (el plato) en base a lo disponible 
-en el menú. Luego, los servidores/cocina se encargan de obtener esa información desde las
-bases de datos y finalmente la API le entrega el plato/información al usuario, si es que este es
-parte del menú.
+![](imagenes/codigo_api.png){.fragment}
+
+![](imagenes/docs_api.png){.fragment}
+
 :::
 
-::::
-
-![](imagenes/api_restaurant.webp){width=60%}
-
-
-## ¿Qué es una API?
-
-<img src="imagenes/rest-api.jpg" width="100%" style="float: right;" />
-
-
-
-
-## Uso y motivación
+## API modelo delitos | Uso y motivación
 
 :::{.incremental .medium-par}
 - Esta API permite abstraer la clasificación de delitos de la programación, facilitando el acceso
