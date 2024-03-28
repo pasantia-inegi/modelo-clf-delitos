@@ -39,25 +39,22 @@ engine: knitr
 [<img src="imagenes/logo_portada2.png" width="20%"/> ]{.center-justified}
 
 
-[**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 [**Modelo y API predicción de delitos**]{.big-par .center-justified}
+[**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 [**Encuesta Nacional Urbana de Seguridad Ciudadana**]{.medium-par .center-justified}
 
-[**Enero 2024**]{.big-par .center-justified}
+[**Abril 2024**]{.big-par .center-justified}
 
 
 ## Contenidos
 
 :::{.incremental .big-par}
 1. Problemática 🔎
-2. Modelamiento
+2. Modelamiento 🛠
     - Descripción
     - Métricas
 3. API modelo delitos
-4. Uso de la API en el browser
-5. Uso programático de la API 💻✍️
-    - ¿Cómo realizamos predicciones?
-    - ¿Cómo extraemos los datos de entrenamiento y testeo?
+4. Uso de la API en el browser 💻 
 
 :::
 
@@ -67,9 +64,9 @@ engine: knitr
 
 ::: {.incremental .medium-par}
 
-- La Encuesta Nacional Urbana de Seguridad Ciudadana (ENUSC) tiene como objetivo obtener información acerca de la victimización, percepción de inseguridad y reacción frente al delito de hogares y personas a nivel nacional y regional, en zonas urbanas del país.
+- La Encuesta Nacional Urbana de Seguridad Ciudadana (*ENUSC*) tiene como objetivo obtener información acerca de la victimización, percepción de inseguridad y reacción frente al delito de hogares y personas a nivel nacional y regional, en zonas urbanas del país.
 
-- La ENUSC posee un módulo de victimización, el cual consta de dos fases:
+- La ENUSC posee un módulo de *victimización*, el cual consta de dos fases:
 
   1. *Screening*; se identifican todos los delitos ocurridos, tanto los intentos como los consumados.
   
@@ -163,7 +160,6 @@ aux %>%
 :::
 
 <br>
-<br>
 
 ## Modelamiento | Descripción (2/3)
 
@@ -176,14 +172,16 @@ aux %>%
   - *Modelo con 16 variables*: Delitos + categoría no clasificable.
 
 
+<br>
 
-- Se realizó un modelo con redes neuronales usando una capa de embeddings y LSTM. Lo que nos permite captar la semántica de los relatos y procesar la característica base secuencial que posee nuestro lenguaje.
+- Se realizó un modelo con redes neuronales usando una capa de embeddings y LSTM. 
+
+    - Esto nos permite captar la semántica de los relatos y procesar la característica base secuencial que posee nuestro lenguaje.
 
 - Los embeddings utilizados corresponden a los creados por Jorge Pérez con *FastText*. Estos poseen 1313423 vectores con una dimensión de 300.
 
 - Estos se encuentran disponibles en su repositorio de github [github.com/dccuchile/spanish-word-embeddings](https://github.com/dccuchile/spanish-word-embeddings).
 
-### PREGUNTAR SOBRE QUE TANTO MENCIONAR ESTAS COSAS... ¿¿SERA NECESARIO PONER UN EJEMPLO DE CONSULTAS DE EMBEDDINGS??? 
 
 :::
 
@@ -204,11 +202,6 @@ Flujo modelo:
 
 :::
 
-<!-- - **Modelo de 15 clases**: 33462 observaciones de entrenamiento y 8357 observaciones de testeo. -->
-
-<!-- - **Modelo de 16 clases**: 33637 observaciones de entrenamiento y 8401 observaciones de testeo. -->
-
-
 ## Modelamiento | Métricas (1/2)
 
 Métricas modelo con **15 clases** en set de testeo:
@@ -220,10 +213,9 @@ Métricas modelo con **15 clases** en set de testeo:
 ```{r m_mod15, echo = FALSE}
 
 metricas_test_mod15clas %>% 
-  mutate( precision= round(precision, digits = 3),
-          recall= round(recall, digits = 3),
-          `f1-score` = round(`f1-score`, digits = 3), 
+  mutate(`f1-score` = round(`f1-score`, digits = 3), 
           support= round(support)) %>% 
+  select(Clases, `f1-score` , support) %>% 
   head(15) %>%
   kbl()
 
@@ -247,12 +239,12 @@ Métricas modelo con **16 clases** en set de testeo:
 ```{r m_mod16, echo =FALSE}
 
 metricas_test_mod16clas %>% 
-  mutate( precision = round(precision, digits = 3),
-          recall = round(recall, digits = 3),
-          `f1-score` = round(`f1-score`, digits = 3), 
-          support = round(support)) %>% 
+  mutate(`f1-score` = round(`f1-score`, digits = 3), 
+          support= round(support)) %>% 
+  select(Clases, `f1-score` , support) %>% 
   head(16) %>% 
   kbl()
+
 ```
 
 :::
@@ -368,114 +360,6 @@ nos permite probarlos.
 [Probemos la api!](http://10.90.2.47:3123/)
 
 
-
-
-
-
-
-
-## [Uso programático de la API | ¿Cómo realizamos predicciones?]{.big-par}
-
-Conexión desde R:
-
-```{r eval = FALSE, echo=TRUE}
-
-# cargar paquetes 
-library(httr)
-library(jsonlite)
-
-# ingresar la url API
-url <- 'http://10.90.2.47:3123/docs'
-
-# indicar tipo de modelo: 'modelo_15_clases' o 'modelo_16_clases':
-query <- list(tipo_modelo = "modelo_15_clases")     
-
-# indicar relatos a clasificar:
-body <- list("Iba hablando por telefono y me arrancaron el celular de las manos", 
-             'ingresaron a la casa rompuendo la chapa, me amenazaron al kish y robaron joyas')
-
-# realizar el requerimiento:
-respuesta <- POST(url,                              # url API
-                  path = '/predecir',               # ruta, NO MODIFICAR
-                  body = body,                      # relatos a clasificar
-                  query = query,                    # modelo 
-                  encode = "json")
-
-# desenvolvemos las predicciones anidadas JSON de la lista a R
-prediccion <- fromJSON(content(respuesta, 'text', encoding = 'UTF-8'))
-
-# revisamos la variable
-str(prediccion)
-
-# transformando de caracter a numerico
-prediccion$probabilidades <- apply(prediccion$probabilidades, 2, as.numeric) %>%
-  as.data.frame()
-
-# extraemos la probabilidad maxima alcanzada:
-
-prediccion$probabilidades <- prediccion$probabilidades %>% 
-  mutate(prob_max = apply(prediccion$probabilidades, 1, max, na.rm=TRUE))
-
-```
-
-
-
-## [Uso programático de la API | ¿Cómo extraemos los datos train-test?]{.big-par}
-
-Para obtener los datos de entrenamiento y testeo, es necesario que los usuarios tengan una cuenta con acceso al endpoint, pues se utiliza un sistema de autenticación mediante *tokens*, el cual posee una duración limitada.
-
-. . .
-
-Conexión desde R:
-
-:::{.medium-par}
-- Obteniendo token$^*$:
-
-```{r eval = FALSE, echo=TRUE}
-
-# Ingresando información del usuario con variables de ambiente:
-usuario <- list(username =  Sys.getenv("USERNAME"), 
-                password = Sys.getenv("PASSWORD"))
-                
-# Realizar requerimiento para obtener el token de acceso del usuario:
-resp_token <- POST(url = 'http://10.90.2.47:3123/token', 
-                   body = usuario,
-                   authenticate(usuario$username, usuario$password))     
-
-# Extraer respuesta y token:
-token <- content(resp_token)
-token <- paste(token$token_type, token$access_token)
-
-```
-
-- Obteniendo datos de entrenamiento y testeo:
-
-```{r eval = FALSE, echo=TRUE}
-
-respuesta <- GET(url,                         
-                 path = '/get_training_data', 
-                 query = query,                          # modelo_15_clases / modelo_16_clases
-                 add_headers('Authorization' = token))              
-
-
-## desenvolvemos los datos tipos JSON a R
-data <- fromJSON(content(respuesta, 'text', encoding = "UTF-8"))
-
-## volvemos a transformar los datos anidados JSON de la lista a R
-y_test <- fromJSON(data$y_test)
-X_test <- fromJSON(data$X_test)
-
-```
-
-:::
-
-<br>
-
-$^*$ [Para editar nuestras variables de ambiente del archivo *.Renviron* en nuestro proyecto, podemos usar la función `usethis::edit_r_environ('project')`, la cual nos abrirá un archivo *.Renviron*. Una vez realizadas las modificaciones, reiniciamos la sesión de R para observar los cambios.]{.medium-par}
-
-<br>
-<br>
-
 ## En resumen
 
 :::{.incremental .big-par}
@@ -500,9 +384,9 @@ $^*$ [Para editar nuestras variables de ambiente del archivo *.Renviron* en nues
 
 
 
-[**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 [**Modelo y API predicción de delitos**]{.big-par .center-justified}
+[**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 [**Encuesta Nacional Urbana de Seguridad Ciudadana**]{.medium-par .center-justified}
 
-[**Enero 2024**]{.big-par .center-justified}
+[**Abril 2024**]{.big-par .center-justified}
 
