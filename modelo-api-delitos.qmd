@@ -39,11 +39,14 @@ engine: knitr
 [<img src="imagenes/logo_portada2.png" width="20%"/> ]{.center-justified}
 
 
-[**Modelo y API predicción de delitos**]{.big-par .center-justified}
+[**API de clasificación de delitos y uso de NLP en el control de calidad**]{.big-par .center-justified}
 [**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 [**Encuesta Nacional Urbana de Seguridad Ciudadana**]{.medium-par .center-justified}
 
 [**Abril 2024**]{.big-par .center-justified}
+
+
+
 
 
 ## Contenidos
@@ -53,7 +56,7 @@ engine: knitr
 2. Modelamiento 🛠
     - Descripción
     - Métricas
-3. API modelo delitos
+3. API modelo delitos 🤖
 4. Uso de la API en el browser 💻 
 
 :::
@@ -87,7 +90,7 @@ engine: knitr
 
 - Este proceso de revisión actualmente se realiza "manualmente", en donde el equipo ENUSC clasifican aproximadamente **500** relatos diarios. 
 
-- Dada esta situación, se creó un modelo de clasificación que asigna un delito, con cierta probabilidad, a cada relato entregado. Lo cual permite ayudar al equipo ENUSC en está revisión. 
+- Dada esta situación, se creó un modelo de clasificación que asigna un delito a cada relato entregado. Lo cual permite ayudar al equipo ENUSC en está revisión. 
 
 
 :::
@@ -384,7 +387,7 @@ nos permite probarlos.
 
 
 
-[**Modelo y API predicción de delitos**]{.big-par .center-justified}
+[**API de clasificación de delitos y uso de NLP en el control de calidad**]{.big-par .center-justified}
 [**Proyecto Ciencia de Datos**]{.big-par .center-justified}
 [**Encuesta Nacional Urbana de Seguridad Ciudadana**]{.medium-par .center-justified}
 
