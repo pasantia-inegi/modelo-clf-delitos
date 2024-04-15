@@ -797,7 +797,10 @@
 <section id="la-api" class="slide level2">
 <h2>La API</h2>
 <div class="medium-par">
-<p>La API está compuesta por 3 <em>endpoints</em> principales y 2 <em>endpoints</em> asociados a la autentificación - Un <em>endpoint</em> es una ruta dentro de la API que tiene asignada una tarea específica</p>
+<p>La API está compuesta por 3 <em>endpoints</em> principales y 2 <em>endpoints</em> asociados a la autentificación</p>
+<ul>
+<li class="fragment">Un <em>endpoint</em> es una ruta dentro de la API que tiene asignada una tarea específica</li>
+</ul>
 <ol type="1">
 <li class="fragment"><p><code>/predecir</code>: Se ingresa lista con glosas de delitos a predecir y un parámetro <code>tipo_modelo</code> que puede tomar valores <code>modelo_15_clases</code> o <code>modelo_16_clases</code> y devuelve un <code>.json</code> con dos llaves por cada glosa: <code>probabilidades</code> y <code>predicciones</code>.</p>
 <ul>

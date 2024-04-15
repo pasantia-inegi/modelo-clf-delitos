@@ -305,6 +305,7 @@ a cualquier persona usuaria que siga el manual de uso.
 :::{.incremental .medium-par}
 
 La API está compuesta por 3 _endpoints_ principales y  2 _endpoints_ asociados a la autentificación
+
   - Un _endpoint_ es una ruta dentro de la API que tiene asignada una tarea específica
   
 
