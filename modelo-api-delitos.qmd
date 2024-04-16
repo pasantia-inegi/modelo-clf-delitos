@@ -86,11 +86,11 @@ engine: knitr
 
 ::: {.incremental .medium-par}
 
-- En cada versión de la ENUSC, en promedio, se debe clasificar y validar al rededor de **10500** relatos de delitos. 
+- En cada versión de la ENUSC, en promedio, se debe clasificar y validar alrededor de **10500** relatos de delitos. 
 
-- Este proceso de revisión actualmente se realiza "manualmente", en donde el equipo ENUSC clasifican aproximadamente **500** relatos diarios. 
+- Este proceso de revisión actualmente se realiza "manualmente", en donde el equipo ENUSC clasifica aproximadamente **500** relatos diarios. 
 
-- Dada esta situación, se creó un modelo de clasificación que asigna un delito a cada relato entregado. Lo cual permite ayudar al equipo ENUSC en está revisión. 
+- Dada esta situación, se creó un modelo de clasificación que asigna un delito a cada relato entregado. Lo cual permite ayudar al equipo ENUSC en esta revisión. 
 
 
 :::
@@ -101,7 +101,7 @@ engine: knitr
 
 ::: {.medium-par}
 
-- Para este modelo de clasificación, se utilizaron 15 tipos de delitos disponibles, los cuales se ditribuyen de la siguiente forma:
+- Para este modelo de clasificación, se utilizaron 15 tipos de delitos disponibles, los cuales se distribuyen de la siguiente forma:
 
   ```{r tabla, echo = FALSE, warning=FALSE, message=FALSE}
   
