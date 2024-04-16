@@ -371,7 +371,7 @@
 <li class="fragment"><p>La Encuesta Nacional Urbana de Seguridad Ciudadana (<em>ENUSC</em>) tiene como objetivo obtener información acerca de la victimización, percepción de inseguridad y reacción frente al delito de hogares y personas a nivel nacional y regional, en zonas urbanas del país.</p></li>
 <li class="fragment"><p>La ENUSC posee un módulo de <em>victimización</em>, el cual consta de dos fases:</p>
 <ol type="1">
-<li class="fragment"><p><em>Screening</em>; se identifican todos los delitos ocurridos, tanto los intentos como los consumados.</p></li>
+<li class="fragment"><p><strong><em>Screening</em></strong>; se identifican todos los delitos ocurridos, tanto los intentos como los consumados.</p></li>
 <li class="fragment"><p><strong><em>Caracterización</em></strong>; se pregunta por las características del último evento mencionado para el tipo de delito declarado.</p></li>
 </ol></li>
 <li class="fragment"><p>Para algunos delitos específicos, se solicitará el relato que describa la situación.</p></li>
@@ -779,6 +779,20 @@
 <p><img data-src="imagenes/codigo_api.png" class="fragment"></p>
 <p><img data-src="imagenes/docs_api.png" class="fragment"></p>
 </div>
+<aside class="notes">
+<p>Starlette: framework/toolkit ASGI lightweight</p>
+<p>Pydantic: librería de validación de datosque permite usar type hints para validar y serializar esquemas de datos</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="api-modelo-delitos-uso-y-motivación" class="slide level2">
 <h2>API modelo delitos | Uso y motivación</h2>
@@ -805,10 +819,7 @@
 <li class="fragment"><p><code>/predecir</code>: Se ingresa lista con glosas de delitos a predecir y un parámetro <code>tipo_modelo</code> que puede tomar valores <code>modelo_15_clases</code> o <code>modelo_16_clases</code> y devuelve un <code>.json</code> con dos llaves por cada glosa: <code>probabilidades</code> y <code>predicciones</code>.</p>
 <ul>
 <li class="fragment">La primera contiene las probabilidades calculadas asociadas a cada delito, junto con el nombre del delito.</li>
-<li class="fragment">La segunda contiene el nombre del delito que tuvo la probabilidad más alta calculada por el modelo seleccionado. Esta se devuelve en formato <code>.json</code>
-<ul>
-<li class="fragment"><code>.json</code> es una forma estándar y flexible de dar formato y estructura a los datos, facilitando su transmisión</li>
-</ul></li>
+<li class="fragment">La segunda contiene el nombre del delito que tuvo la probabilidad más alta calculada por el modelo seleccionado. Esta se devuelve en formato <code>.json</code></li>
 </ul></li>
 </ol>
 </div>

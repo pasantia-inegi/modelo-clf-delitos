@@ -71,7 +71,7 @@ engine: knitr
 
 - La ENUSC posee un módulo de *victimización*, el cual consta de dos fases:
 
-  1. *Screening*; se identifican todos los delitos ocurridos, tanto los intentos como los consumados.
+  1. ***Screening***; se identifican todos los delitos ocurridos, tanto los intentos como los consumados.
   
   2. ***Caracterización***; se pregunta por las características del último evento mencionado para el tipo de delito declarado. 
 
@@ -283,6 +283,17 @@ OpenAPI y Pydantic, lo que aporta con robustez en los sistemas.
 ![](imagenes/docs_api.png){.fragment}
 
 :::
+
+
+::: notes
+
+Starlette: framework/toolkit ASGI lightweight
+
+Pydantic: librería de validación de datosque permite usar type hints para validar y serializar esquemas de datos
+
+:::
+
+
 
 ## API modelo delitos | Uso y motivación
 
