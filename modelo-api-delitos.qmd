@@ -314,7 +314,7 @@ La API está compuesta por 3 _endpoints_ principales y  2 _endpoints_ asociados 
 
     - La primera contiene las probabilidades calculadas asociadas a cada delito, junto con el nombre del delito.
     - La segunda contiene el nombre del delito que tuvo la probabilidad más alta calculada por el modelo seleccionado. Esta se devuelve en formato `.json`
-        - `.json` es una forma estándar y flexible de dar formato y estructura a los datos, facilitando su transmisión
+
 
 :::
 
