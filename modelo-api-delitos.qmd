@@ -188,6 +188,10 @@ aux %>%
 
 :::
 
+## Modelamiento | Descripción (2/3)
+
+![](imagenes/embedding.png){width=70%}
+
 ## Modelamiento | Descripción (3/3)
 
 Flujo modelo:
